@@ -221,6 +221,9 @@ ul{padding:0;list-style:none}
 .card-media{position:relative;overflow:hidden;background:var(--paper-3);aspect-ratio:4/5}
 .card-media img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease),filter .6s}
 .card:hover .card-media img{transform:scale(1.045)}
+.card-media.contain{background:#FCF7F5}
+.card-media.contain img{object-fit:contain}
+.card:hover .card-media.contain img{transform:none}
 .card-badge{
   position:absolute;top:14px;left:14px;z-index:2;background:rgba(251,247,240,.94);
   backdrop-filter:blur(4px);color:var(--ink);font-size:9.5px;letter-spacing:.16em;
@@ -229,6 +232,7 @@ ul{padding:0;list-style:none}
 .card-badge.soon{color:#7a725f;background:rgba(245,238,227,.92);border:1px solid rgba(255,255,255,.7)}
 .card-badge.form{background:rgba(44,41,37,.9);color:var(--paper);letter-spacing:.1em;border:1px solid rgba(44,41,37,.9)}
 .card-badge.dual{background:rgba(108,113,87,.94);color:var(--paper);letter-spacing:.1em;border:1px solid rgba(108,113,87,.94)}
+.card-badge.store{background:rgba(176,122,92,.92);color:var(--paper);letter-spacing:.1em;border:1px solid rgba(176,122,92,.92)}
 .card-channel{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;letter-spacing:.03em;color:var(--ink-2)}
 .card-channel::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--olive);flex:none}
 .card-channel.store::before{background:#c6b193}
@@ -394,7 +398,12 @@ ul{padding:0;list-style:none}
 .m-var[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .m-var[aria-pressed="true"] .v-price{color:rgba(251,247,240,.6)}
 .m-variant-block[hidden]{display:none}
-.modal-media.contain img{object-fit:contain;background:#F7F2EB}
+.modal-media.contain img{object-fit:contain;background:#FCF7F5}
+.modal-sheet.wide{grid-template-columns:1fr}
+.modal-sheet.wide .modal-media{aspect-ratio:1503/978;min-height:0;background:#FCF7F5}
+.modal-sheet.wide .modal-body{padding:34px clamp(20px,4vw,52px) 40px;max-width:760px;margin-inline:auto;width:100%}
+.m-store-note{font-size:10.5px;color:var(--muted);letter-spacing:.02em;text-align:center;margin-top:-2px;line-height:1.6}
+.m-store-note[hidden]{display:none}
 @media(max-width:760px){.m-variants{grid-template-columns:1fr;gap:7px}.m-var{padding:11px 13px}}
 .m-rule{height:1px;background:var(--line);margin:24px 0}
 .m-block{margin-bottom:20px}
@@ -647,8 +656,8 @@ ul{padding:0;list-style:none}
 <body>
 
 <div class="notice">
-  <span class="n-full">디지털 자료·자격증 과정은 <b>구글폼으로 바로 신청</b> <span>·</span> 실물 상품은 <b>12월 스마트스토어 오픈</b> 예정 <span>·</span> 오픈 소식은 DM으로 먼저 안내드려요</span>
-  <span class="n-short"><b>디지털·자격증은 구글폼</b>, 실물은 12월 스마트스토어 오픈</span>
+  <span class="n-full">디지털 자료·자격증 과정은 <b>구글폼으로 바로 신청</b> <span>·</span> 실물 상품은 <b>마음숨 스토어</b>에서 <span>·</span> 첫 상품 등록 후 순차 활성화</span>
+  <span class="n-short"><b>디지털·자격증은 구글폼</b>, 실물은 마음숨 스토어</span>
 </div>
 
 <header class="nav" id="nav">
@@ -756,7 +765,7 @@ ul{padding:0;list-style:none}
         </p>
         <p class="ss-row">
           <span class="dot" data-store-dot></span>
-          <span data-store-text>실물 상품은 네이버 스마트스토어에서 12월 오픈 예정이에요. 지금은 DM으로 사전 예약을 받아요.</span>
+          <span data-store-text>실물 상품은 네이버 스마트스토어(「마음숨 스토어」)에서 구매하실 수 있어요. 배송비 3,000원 별도 · 첫 등록 후 순차 활성화.</span>
           <a data-store-link href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">사전 예약 DM ↗</a>
         </p>
       </div>
@@ -911,13 +920,13 @@ ul{padding:0;list-style:none}
     <div class="wrap open-in">
       <div>
         <p class="eyebrow">Opening</p>
-        <h2>디지털은 바로,<br>실물은 12월에</h2>
-        <p>디지털 자료와 자격증 과정은 구글폼으로 바로 신청받고, 실물 상품은 12월 스마트스토어에서 만나요. 먼저 알고 싶다면 인스타그램 DM으로 ‘숨결샘’ 한 마디만 남겨 주세요.</p>
+        <h2>디지털은 바로,<br>실물은 스토어에서</h2>
+        <p>디지털 자료와 자격증 과정은 구글폼으로 바로 신청받고, 실물 상품은 네이버 「마음숨 스토어」에서 만나요. 먼저 알고 싶다면 인스타그램 DM으로 ‘숨결샘’ 한 마디만 남겨 주세요.</p>
       </div>
       <div class="open-actions">
         <a class="btn btn-light" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">인스타 DM으로 알림 신청 <span class="arw">↗</span></a>
         <a class="btn btn-outline-light" href="https://www.instagram.com/mindmove_lab/" target="_blank" rel="noopener">@mindmove_lab 팔로우</a>
-        <p class="open-fine">디지털 자료·자격증은 구글폼 신청 후 계좌이체로 진행되며, 확인 후 파일을 보내드려요.<br>실물 상품은 12월 스마트스토어에서 배송됩니다.</p>
+        <p class="open-fine">디지털 자료·자격증은 구글폼 신청 후 계좌이체로 진행되며, 확인 후 파일을 보내드려요.<br>실물 상품은 「마음숨 스토어」에서 배송비 3,000원 별도로 구매하실 수 있어요.</p>
       </div>
     </div>
   </section>
@@ -950,7 +959,7 @@ ul{padding:0;list-style:none}
         </div>
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false"><span><span class="q-mark">05</span>오픈은 정확히 언제인가요?</span><span class="ic" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>2026년 12월 중 오픈을 목표로 준비하고 있습니다. 알림을 신청하시면 오픈 하루 전, 가장 먼저 안내드립니다.</p></div>
+          <div class="faq-a"><p>실물 상품은 네이버 「마음숨 스토어」에서 순서대로 열립니다. 첫 상품(06 색채 타로카드)을 등록하면 다음 날부터 스토어 링크가 활성화되고, 이어서 나머지 상품이 차례로 올라갑니다. 배송비는 3,000원 별도입니다.</p></div>
         </div>
       </div>
     </div>
@@ -1035,6 +1044,7 @@ ul{padding:0;list-style:none}
       </div>
       <div class="m-actions">
         <a class="btn btn-dark" id="mBuy" href="#" role="button">구글폼으로 바로 신청 <span class="arw">→</span></a>
+        <p class="m-store-note" id="mStoreNote" hidden>마음숨 스토어 · 배송비 3,000원 (첫 등록 후 순차 활성화)</p>
         <div class="m-channels" id="mChannels">
           <a data-ch="form" href="#">구글폼 신청 <span>↗</span></a>
           <a data-ch="dm" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">인스타 DM <span>↗</span></a>
@@ -1059,13 +1069,31 @@ const PRODUCTS = [
     id: 1, no: '01', cat: 'sticker', catLabel: 'Emoticon · Sticker', channel: 'form',
     title: '이모티콘 & 스티커',
     sub: '요가·필라테스 동작을 담은 손그림 스티커 세트',
-    desc: '매일의 몸을 위한 작은 신호, 24가지 동작',
+    desc: '매일의 몸을 위한 작은 신호, 18가지 동작',
     img: 'assets/p1-emoticons.jpg',
-    tag: '디지털 · 카카오 이모티콘 · PNG',
+    tag: '디지털 · 실물 스티커',
     price: 12000, was: 18000, status: 'open',
-    items: ['요가·필라테스 동작 이모티콘 24종 (원본 PNG)', '다꾸용 스티커 40종 (PNG·SVG)', 'A4 인쇄용 스티커 시트 PDF 1종'],
+    items: ['요가·필라테스 동작 이모티콘 18종 (원본 PNG)', '다꾸용 스티커 18종 (PNG·SVG)', 'A4 인쇄용 스티커 시트 PDF 1종'],
     for: ['메신저로 “오늘은 좀 쉬고 싶다”를 말하고 싶은 날', '다이어리를 몸의 기록으로 채우고 싶은 분'],
-    point: '동작의 이름이 아니라 몸의 느낌으로 캡션을 달았습니다. 보내는 사람의 하루가 조금 가벼워지도록.'
+    point: '동작의 이름이 아니라 몸의 느낌으로 캡션을 달았습니다. 보내는 사람의 하루가 조금 가벼워지도록.',
+    badgeText: '디지털 · 실물 선택',
+    variantNote: '디지털은 구글폼 · 실물 스티커는 스마트스토어',
+    variants: [
+      {
+        key: 'file', icon: '📄', label: '디지털 파일로 받기', channel: 'form',
+        price: 12000, priceNote: '바로 발송',
+        tag: '디지털 파일 · 결제 후 메일 발송',
+        items: ['동작 이모티콘 18종 (원본 PNG)', '다꾸용 스티커 18종 (PNG·SVG)', 'A4 인쇄용 스티커 시트 PDF 1종'],
+        fine: '구글폼에서 계좌이체로 신청하시면 확인 후 파일을 메일로 보내드려요.'
+      },
+      {
+        key: 'sticker', icon: '📦', label: '실물 스티커로 받기', channel: 'store',
+        price: 15000, priceNote: '임시 표기',
+        tag: '실물 스티커 · 배송비 3,000원 별도',
+        items: ['실물 스티커 18종 (A6 · 300g 무광)', 'A4 인쇄용 스티커 시트 PDF 동봉', '배송비 3,000원 별도'],
+        fine: '실물 스티커는 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 첫 등록 후 순차 활성화.'
+      }
+    ]
   },
   {
     id: 2, no: '02', cat: 'digital', catLabel: 'Digital PDF', channel: 'form',
@@ -1103,7 +1131,7 @@ const PRODUCTS = [
         price: 29000, was: 39000, priceNote: '12월 배송',
         tag: '실물 스프링북 · 12월 배송',
         items: ['스프링 제본 실물 시퀀스북 1권 (A4)', '시퀀스 12개 (초급 / 중급 / 회복 흐름)', '동작 선화 220컷 — 직접 그린 그림', '호흡·큐잉 노트 포함'],
-        fine: '실물책은 12월 스마트스토어에서 배송될 예정이에요. 지금은 인스타 DM으로 사전 예약을 받고 있어요.'
+        fine: '실물책은 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 12월 배송.'
       }
     ]
   },
@@ -1135,11 +1163,11 @@ const PRODUCTS = [
     id: 6, no: '06', cat: 'object', catLabel: 'Object', channel: 'store',
     title: '색채 타로카드',
     sub: '색으로 읽는 오늘의 마음',
-    desc: '컬러와 상징으로 스스로를 살피는 40장',
+    desc: '컬러와 상징으로 스스로를 살피는 22장',
     img: 'assets/p6-color-tarot.jpg', fit: 'contain',
-    tag: '실물 배송',
-    price: 38000, was: 52000, status: 'open',
-    items: ['카드 40장 (수채 일러스트)', '안내서 1부 — 리딩 스프레드 3종', '린넨 파우치'],
+    tag: '실물 배송 · 배송비 3,000원 별도',
+    price: 18000, was: 24000, status: 'open',
+    items: ['카드 22장 — 1 Red ~ 21 Peach + Your Color (수채 일러스트)', '안내서 1부 — 리딩 스프레드 3종', '린넨 파우치', '배송비 3,000원 별도'],
     for: ['하루를 정리하는 저녁 루틴을 만들고 싶은 분', '상담·코칭 도구를 찾는 분'],
     point: '정답을 말해 주는 카드가 아니라, 질문을 건네는 카드입니다. 색 이름과 감정 단어를 함께 적어 두었어요.'
   },
@@ -1167,7 +1195,7 @@ const PRODUCTS = [
         price: 18000, was: 22000, priceNote: '12월 배송',
         tag: '실물 컬러링북 · 12월 배송',
         items: ['무선 제본 실물 컬러링북 1권', '만다라 48면 (수채화·색연필 겸용 도안)', '난이도 3단계 · 컬러 가이드', 'PDF판 함께 제공'],
-        fine: '실물책은 12월 스마트스토어에서 배송될 예정이에요. 지금은 인스타 DM으로 사전 예약을 받고 있어요.'
+        fine: '실물 컬러링북은 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 12월 배송.'
       }
     ]
   }
@@ -1183,7 +1211,7 @@ const $$ = (s, el = document) => [...el.querySelectorAll(s)];
    2) 네이버 스마트스토어 (실물 배송 · 오픈 예정) → 03 · 05 · 06 · 07
    ============================================================ */
 const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSed-aKan6mwxoXgQBLHHtfsfteXBgq5rA-ZFVigohyD0EEc8g/viewform';   // 구글폼 응답 링크 (2026-11-20 연결)
-const SMARTSTORE_URL = '';    // 예: 'https://smartstore.naver.com/sumgyeolsaem' — 채우면 ‘스마트스토어’가 연결됩니다.
+const SMARTSTORE_URL = 'https://smartstore.naver.com/soombreath_store';   // 마음숨 스토어 (2026-11-21 연결 · 첫 상품 등록 후 순차 활성화)
 const PER_ITEM_URL = {};      // 상품별 개별 링크가 필요할 때만: { p3: 'https://smartstore.naver.com/…/products/1234' }
 
 const itemKey = item => item.key || ('p' + item.id);
@@ -1252,15 +1280,17 @@ const COURSES = [
 /* ---------- 카드 렌더 ---------- */
 const grid = $('#productGrid');
 const badgeOf = p => p.variants
-  ? '<span class="card-badge dual">PDF · 실물 선택</span>'
+  ? `<span class="card-badge dual">${p.badgeText || 'PDF · 실물 선택'}</span>`
   : (isForm(p)
     ? '<span class="card-badge form">구글폼 신청</span>'
-    : '<span class="card-badge soon">스마트스토어 12월</span>');
+    : (SMARTSTORE_URL
+      ? '<span class="card-badge store">스마트스토어</span>'
+      : '<span class="card-badge soon">스마트스토어 12월</span>'));
 const channelLine = p => p.variants
-  ? '<span class="card-channel">PDF는 구글폼 · 실물책은 스마트스토어</span>'
+  ? `<span class="card-channel">${p.variantNote || 'PDF는 구글폼 · 실물책은 스마트스토어'}</span>`
   : (isForm(p)
     ? '<span class="card-channel">구글폼 · 계좌이체 즉시 신청</span>'
-    : '<span class="card-channel store">스마트스토어 오픈 예정 · DM 사전 예약</span>');
+    : `<span class="card-channel store">${SMARTSTORE_URL ? '마음숨 스토어 · 배송비 3,000원' : '스마트스토어 오픈 예정 · DM 사전 예약'}</span>`);
 const priceBlock = p => p.variants
   ? `<span class="card-price">
         <span class="price-now"><b>${won(minPrice(p))}</b>원부터</span>
@@ -1274,7 +1304,7 @@ const priceBlock = p => p.variants
 
 grid.innerHTML = PRODUCTS.map(p => `
   <button class="card reveal" data-id="${p.id}" data-cat="${p.cat}" data-channel-url="${urlFor(p)}" aria-label="${p.title} 상세 보기">
-    <div class="card-media">
+    <div class="card-media${p.fit === 'contain' ? ' contain' : ''}">
       <img src="${p.img}" alt="${p.title}" loading="lazy" width="1200" height="1200">
       ${badgeOf(p)}
       <span class="card-idx">${p.no}</span>
@@ -1377,7 +1407,7 @@ const modalChannel = (key, label, url) => url
 
 function buyLabel(channel) {
   if (channel !== 'store') return '구글폼으로 바로 신청';
-  return SMARTSTORE_URL ? '스마트스토어에서 구매' : '스마트스토어 오픈 알림 신청';
+  return SMARTSTORE_URL ? '스마트스토어에서 구매하기' : '스마트스토어 오픈 알림 신청';
 }
 
 /* 하나의 상품을 지금 화면에 칠한다. variant(받는 형태)를 넘기면 가격·문구·링크가 함께 바뀜니다. */
@@ -1396,29 +1426,32 @@ function paintModal(p, kind, variant) {
   $('#mWas').textContent = was ? won(was) + '원' : '';
   $('#mWas').style.display = was ? '' : 'none';
   $('#mPriceNote').textContent = isCourse ? '임시 표기'
-    : (v ? (v.priceNote || (form ? 'PDF 가격' : '실물 가격')) : (form ? '오픈 특가' : '오픈 예정가'));
+    : (v ? (v.priceNote || (form ? 'PDF 가격' : '실물 가격')) : (form ? '오픈 특가' : '오픈 특가'));
   $('#mTag').textContent = (v && v.tag)
     ? v.tag
     : (form
       ? (isCourse ? '온라인 수강 · 실기 기록 · 수료증 발급' : '구글폼 신청 · 계좌이체 · 디지털 발송')
-      : '스마트스토어 12월 오픈 · 사전 예약 DM');
+      : (SMARTSTORE_URL ? '마음숨 스토어 · 배송비 3,000원' : '스마트스토어 12월 오픈 · 사전 예약 DM'));
   $('#mItems').innerHTML = items.map(t => `<li>${t}</li>`).join('');
   $('#mBuy').innerHTML = buyLabel(channel) + ' <span class="arw">→</span>';
   $('#mBuy').dataset.name = p.title;
   $('#mBuy').dataset.channelUrl = url;
+  $('#mStoreNote').hidden = form;
   if (url) { $('#mBuy').href = url; $('#mBuy').target = '_blank'; $('#mBuy').rel = 'noopener'; }
   else { $('#mBuy').removeAttribute('href'); $('#mBuy').removeAttribute('target'); }
   $('#mChannels').innerHTML = form
     ? modalChannel('form', '구글폼 신청', url)
       + (isCourse ? modalChannel('classes', '과정 문의', '') : '')
       + modalChannel('dm', '인스타 DM', '')
-    : modalChannel('store', '스마트스토어', url) + modalChannel('dm', '사전 예약 DM', '');
+    : (modalChannel('store', '스마트스토어', url) + modalChannel('dm', SMARTSTORE_URL ? '인스타 DM' : '사전 예약 DM', ''));
   $('#mFine').textContent = (v && v.fine) ? v.fine
     : (form
       ? (isCourse
         ? '가격과 모집 일정은 임시 표기입니다. 구글폼에서 계좌이체로 신청하시면 순차적으로 안내드려요.'
         : '구글폼에서 계좌이체로 신청하시면 확인 후 파일을 보내드려요.')
-      : '스마트스토어는 12월 오픈 예정입니다. 지금은 인스타 DM으로 사전 예약을 받아요.');
+      : (SMARTSTORE_URL
+        ? '실물 상품은 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 첫 등록 후 순차 활성화.'
+        : '스마트스토어는 12월 오픈 예정입니다. 지금은 인스타 DM으로 사전 예약을 받아요.'));
 }
 
 function renderVariantChips(p, selected) {
@@ -1449,6 +1482,7 @@ function openModal(p, kind = 'product') {
   $('#mImg').src = p.img;
   $('#mImg').alt = p.title;
   $('#mMedia').classList.toggle('contain', p.fit === 'contain');
+  sheet.classList.toggle('wide', p.fit === 'contain');
   $('#mTitle').textContent = p.title;
   $('#mSub').textContent = p.sub;
   $('#mItemsTitle').textContent = p.itemsTitle || '구성';
@@ -1555,7 +1589,7 @@ function syncChannelState() {
     const sDot = $('[data-store-dot]', box), sTxt = $('[data-store-text]', box), sLink = $('[data-store-link]', box);
     if (sDot) sDot.classList.toggle('on', storeOn);
     if (sTxt) sTxt.textContent = storeOn
-      ? '실물 상품(03·05·06·07)은 스마트스토어에서 바로 구매하실 수 있어요.'
+      ? '실물 상품(01 실물 스티커 · 03 · 05 · 06 · 07)은 네이버 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 첫 등록 후 순차 활성화.'
       : '실물 상품(05·06)과 03·07의 실물책은 스마트스토어에서 12월 오픈 예정이에요. 지금은 DM으로 사전 예약을 받아요.';
     if (sLink) {
       sLink.href = storeOn ? SMARTSTORE_URL : 'https://ig.me/m/mindmove_lab';
