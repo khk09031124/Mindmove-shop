@@ -228,6 +228,7 @@ ul{padding:0;list-style:none}
 }
 .card-badge.soon{color:#7a725f;background:rgba(245,238,227,.92);border:1px solid rgba(255,255,255,.7)}
 .card-badge.form{background:rgba(44,41,37,.9);color:var(--paper);letter-spacing:.1em;border:1px solid rgba(44,41,37,.9)}
+.card-badge.dual{background:rgba(108,113,87,.94);color:var(--paper);letter-spacing:.1em;border:1px solid rgba(108,113,87,.94)}
 .card-channel{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;letter-spacing:.03em;color:var(--ink-2)}
 .card-channel::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--olive);flex:none}
 .card-channel.store::before{background:#c6b193}
@@ -253,6 +254,7 @@ ul{padding:0;list-style:none}
 .price-now b{font-weight:500;font-size:16px}
 .price-was{font-size:11.5px;color:#a49a8a;text-decoration:line-through}
 .price-off{font-size:10px;letter-spacing:.08em;color:var(--clay)}
+.price-from{font-size:10.5px;letter-spacing:.01em;color:var(--muted)}
 .card-more{font-size:11px;color:var(--muted);letter-spacing:.06em;display:none}
 
 /* 준비 중 카드 */
@@ -380,6 +382,20 @@ ul{padding:0;list-style:none}
 .m-price .now b{font-weight:500}
 .m-price .was{font-size:12.5px;color:#a49a8a;text-decoration:line-through}
 .m-price .off{font-size:10.5px;color:var(--clay);letter-spacing:.06em;border:1px solid rgba(176,122,92,.35);padding:2px 7px}
+.m-variants{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.m-var{
+  display:flex;flex-direction:column;gap:3px;text-align:left;padding:12px 14px;
+  border:1px solid var(--line);background:rgba(255,255,255,.45);
+  transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease);
+}
+.m-var .v-label{display:flex;align-items:center;gap:7px;font-size:12.5px;letter-spacing:-.01em;line-height:1.4}
+.m-var .v-price{font-size:10.5px;color:var(--muted);letter-spacing:.02em}
+.m-var:hover{border-color:var(--ink-2)}
+.m-var[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.m-var[aria-pressed="true"] .v-price{color:rgba(251,247,240,.6)}
+.m-variant-block[hidden]{display:none}
+.modal-media.contain img{object-fit:contain;background:#F7F2EB}
+@media(max-width:760px){.m-variants{grid-template-columns:1fr;gap:7px}.m-var{padding:11px 13px}}
 .m-rule{height:1px;background:var(--line);margin:24px 0}
 .m-block{margin-bottom:20px}
 .m-block h6{font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;font-weight:500;margin-bottom:9px}
@@ -988,12 +1004,16 @@ ul{padding:0;list-style:none}
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-hidden="true">
   <div class="modal-bg" data-close></div>
   <div class="modal-sheet" role="document">
-    <div class="modal-media"><img id="mImg" alt=""></div>
+    <div class="modal-media" id="mMedia"><img id="mImg" alt=""></div>
     <div class="modal-body">
       <button class="modal-close" data-close aria-label="닫기"></button>
       <p class="m-cat" id="mCat"></p>
       <h3 class="m-title" id="mTitle"></h3>
       <p class="m-sub" id="mSub"></p>
+      <div class="m-block m-variant-block" id="mVariantBlock" hidden>
+        <h6>받는 형태</h6>
+        <div class="m-variants" id="mVariants" role="group" aria-label="받는 형태 선택"></div>
+      </div>
       <div class="m-price">
         <span class="now"><b id="mNow"></b>원</span>
         <span class="was" id="mWas"></span>
@@ -1060,16 +1080,32 @@ const PRODUCTS = [
     point: '한 회기를 끝까지 끌고 갈 수 있도록 예상 반응과 대응 멘트까지 적었습니다. A4 흑백 인쇄에 맞춰 여백을 잡았어요.'
   },
   {
-    id: 3, no: '03', cat: 'digital', catLabel: 'Digital PDF · Book', channel: 'store',
+    id: 3, no: '03', cat: 'digital', catLabel: 'Digital PDF · Book', channel: 'form',
     title: '요가 / 필라테스 시퀀스북',
     sub: 'ASAR 요가 100 · ACT 필라테라피 120 기반',
-    desc: '동작의 배열과 호흡을 한 장에 담은 강사용 시퀀스',
+    desc: 'PDF로 바로 받기 / 실물 스프링북 중 선택',
     img: 'assets/p3-sequence-book.jpg',
-    tag: '디지털 PDF · POD 책',
-    price: 29000, was: 39000, status: 'soon',
-    items: ['시퀀스 12개 (초급 / 중급 / 회복 흐름)', '동작 선화 220컷 — 직접 그린 그림', '호흡·큐잉 노트, 수업용 인쇄본(POD) 안내'],
+    tag: '디지털 PDF · 실물 스프링북',
+    price: 19000, was: 29000, status: 'open',
+    items: ['시퀀스 12개 (초급 / 중급 / 회복 흐름)', '동작 선화 220컷 — 직접 그린 그림', '호흡·큐잉 노트'],
     for: ['수업을 준비하는 요가·필라테스 강사', '집에서 혼자 흐름을 만들고 싶은 분'],
-    point: '한 장에 한 시퀀스. 눈으로 따라가면 그대로 수업이 되도록 배열했습니다.'
+    point: '한 장에 한 시퀀스. 눈으로 따라가면 그대로 수업이 되도록 배열했습니다.',
+    variants: [
+      {
+        key: 'pdf', icon: '📄', label: 'PDF 파일로 받기', channel: 'form',
+        price: 19000, priceNote: '바로 발송',
+        tag: '디지털 PDF · 결제 후 메일 발송',
+        items: ['시퀀스북 PDF 1권 (A4 · 인쇄용)', '시퀀스 12개 (초급 / 중급 / 회복 흐름)', '동작 선화 220컷 — 직접 그린 그림', '호흡·큐잉 노트 포함'],
+        fine: '구글폼에서 계좌이체로 신청하시면 확인 후 PDF 파일을 메일로 보내드려요.'
+      },
+      {
+        key: 'book', icon: '📦', label: '실물책으로 받기', channel: 'store',
+        price: 29000, was: 39000, priceNote: '12월 배송',
+        tag: '실물 스프링북 · 12월 배송',
+        items: ['스프링 제본 실물 시퀀스북 1권 (A4)', '시퀀스 12개 (초급 / 중급 / 회복 흐름)', '동작 선화 220컷 — 직접 그린 그림', '호흡·큐잉 노트 포함'],
+        fine: '실물책은 12월 스마트스토어에서 배송될 예정이에요. 지금은 인스타 DM으로 사전 예약을 받고 있어요.'
+      }
+    ]
   },
   {
     id: 4, no: '04', cat: 'digital', catLabel: 'Digital PDF', channel: 'form',
@@ -1100,7 +1136,7 @@ const PRODUCTS = [
     title: '색채 타로카드',
     sub: '색으로 읽는 오늘의 마음',
     desc: '컬러와 상징으로 스스로를 살피는 40장',
-    img: 'assets/p6-color-tarot.jpg',
+    img: 'assets/p6-color-tarot.jpg', fit: 'contain',
     tag: '실물 배송',
     price: 38000, was: 52000, status: 'open',
     items: ['카드 40장 (수채 일러스트)', '안내서 1부 — 리딩 스프레드 3종', '린넨 파우치'],
@@ -1108,16 +1144,32 @@ const PRODUCTS = [
     point: '정답을 말해 주는 카드가 아니라, 질문을 건네는 카드입니다. 색 이름과 감정 단어를 함께 적어 두었어요.'
   },
   {
-    id: 7, no: '07', cat: 'object', catLabel: 'Object · Digital', channel: 'store',
+    id: 7, no: '07', cat: 'object', catLabel: 'Object · Digital', channel: 'form',
     title: '아트 만다라 컬러링북',
     sub: '비우고 채우는 30분',
-    desc: '손을 움직여 마음을 내려놓는 시간',
+    desc: 'PDF로 받기 / 실물 컬러링북 중 선택',
     img: 'assets/p7-mandala-book.jpg',
-    tag: '실물 · PDF',
-    price: 16000, was: 22000, status: 'soon',
-    items: ['만다라 48면 (수채화·색연필 겸용 도안)', '난이도 3단계 · 컬러 가이드', 'PDF판 + 무선 제본 실물'],
+    tag: '디지털 PDF · 실물 컬러링북',
+    price: 12000, was: 18000, status: 'open',
+    items: ['만다라 48면 (수채화·색연필 겸용 도안)', '난이도 3단계 · 컬러 가이드'],
     for: ['잠들기 전 30분을 조용히 쓰고 싶은 분', '아이와 함께 조용한 시간을 갖고 싶은 부모'],
-    point: '여백을 넓게 두어 손이 편하게 움직이도록 했습니다. 잘 채우지 않아도 괜찮은 도안입니다.'
+    point: '여백을 넓게 두어 손이 편하게 움직이도록 했습니다. 잘 채우지 않아도 괜찮은 도안입니다.',
+    variants: [
+      {
+        key: 'pdf', icon: '📄', label: 'PDF 파일로 받기', channel: 'form',
+        price: 12000, priceNote: '바로 발송',
+        tag: '디지털 PDF · 결제 후 메일 발송',
+        items: ['만다라 컬러링북 PDF 1권 (A4 · 인쇄용)', '만다라 48면 (수채화·색연필 겸용 도안)', '난이도 3단계 · 컬러 가이드'],
+        fine: '구글폼에서 계좌이체로 신청하시면 확인 후 PDF 파일을 메일로 보내드려요.'
+      },
+      {
+        key: 'book', icon: '📦', label: '실물책으로 받기', channel: 'store',
+        price: 18000, was: 22000, priceNote: '12월 배송',
+        tag: '실물 컬러링북 · 12월 배송',
+        items: ['무선 제본 실물 컬러링북 1권', '만다라 48면 (수채화·색연필 겸용 도안)', '난이도 3단계 · 컬러 가이드', 'PDF판 함께 제공'],
+        fine: '실물책은 12월 스마트스토어에서 배송될 예정이에요. 지금은 인스타 DM으로 사전 예약을 받고 있어요.'
+      }
+    ]
   }
 ];
 
@@ -1137,6 +1189,9 @@ const PER_ITEM_URL = {};      // 상품별 개별 링크가 필요할 때만: { 
 const itemKey = item => item.key || ('p' + item.id);
 const isForm = item => item.channel !== 'store';
 const urlFor = item => PER_ITEM_URL[itemKey(item)] || (isForm(item) ? GOOGLE_FORM_URL : SMARTSTORE_URL);
+/* 채널을 직접 넣어 계산 (03 · 07처럼 PDF/실물 두 형태를 가진 상품용) */
+const urlForChannel = (channel, item) => PER_ITEM_URL[itemKey(item)] || (channel !== 'store' ? GOOGLE_FORM_URL : SMARTSTORE_URL);
+const minPrice = p => p.variants ? Math.min(...p.variants.map(v => v.price)) : p.price;
 
 /* ============================================================
    온라인 자격증 과정 — 가격·문구는 여기서 고치면 카드·모달이 함께 바뀝니다.
@@ -1196,12 +1251,26 @@ const COURSES = [
 
 /* ---------- 카드 렌더 ---------- */
 const grid = $('#productGrid');
-const badgeOf = p => isForm(p)
-  ? '<span class="card-badge form">구글폼 신청</span>'
-  : '<span class="card-badge soon">스마트스토어 12월</span>';
-const channelLine = p => isForm(p)
-  ? '<span class="card-channel">구글폼 · 계좌이체 즉시 신청</span>'
-  : '<span class="card-channel store">스마트스토어 오픈 예정 · DM 사전 예약</span>';
+const badgeOf = p => p.variants
+  ? '<span class="card-badge dual">PDF · 실물 선택</span>'
+  : (isForm(p)
+    ? '<span class="card-badge form">구글폼 신청</span>'
+    : '<span class="card-badge soon">스마트스토어 12월</span>');
+const channelLine = p => p.variants
+  ? '<span class="card-channel">PDF는 구글폼 · 실물책은 스마트스토어</span>'
+  : (isForm(p)
+    ? '<span class="card-channel">구글폼 · 계좌이체 즉시 신청</span>'
+    : '<span class="card-channel store">스마트스토어 오픈 예정 · DM 사전 예약</span>');
+const priceBlock = p => p.variants
+  ? `<span class="card-price">
+        <span class="price-now"><b>${won(minPrice(p))}</b>원부터</span>
+        <span class="price-from">PDF / 실물책 중 선택</span>
+      </span>`
+  : `<span class="card-price">
+        <span class="price-now"><b>${won(p.price)}</b>원</span>
+        <span class="price-was">${won(p.was)}원</span>
+        <span class="price-off">${Math.round((1 - p.price / p.was) * 100)}%</span>
+      </span>`;
 
 grid.innerHTML = PRODUCTS.map(p => `
   <button class="card reveal" data-id="${p.id}" data-cat="${p.cat}" data-channel-url="${urlFor(p)}" aria-label="${p.title} 상세 보기">
@@ -1215,11 +1284,7 @@ grid.innerHTML = PRODUCTS.map(p => `
       <span class="card-cat">${p.tag}</span>
       <span class="card-title">${p.title}</span>
       <span class="card-desc">${p.desc}</span>
-      <span class="card-price">
-        <span class="price-now"><b>${won(p.price)}</b>원</span>
-        <span class="price-was">${won(p.was)}원</span>
-        <span class="price-off">${Math.round((1 - p.price / p.was) * 100)}%</span>
-      </span>
+      ${priceBlock(p)}
       ${channelLine(p)}
     </div>
   </button>
@@ -1310,34 +1375,35 @@ const modalChannel = (key, label, url) => url
     ? `<a data-ch="dm" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">${label} <span>↗</span></a>`
     : `<button data-ch="${key}" data-channel-url="">${label} <span>↗</span></button>`);
 
-function buyLabel(p) {
-  if (isForm(p)) return '구글폼으로 바로 신청';
+function buyLabel(channel) {
+  if (channel !== 'store') return '구글폼으로 바로 신청';
   return SMARTSTORE_URL ? '스마트스토어에서 구매' : '스마트스토어 오픈 알림 신청';
 }
 
-function openModal(p, kind = 'product') {
+/* 하나의 상품을 지금 화면에 칠한다. variant(받는 형태)를 넘기면 가격·문구·링크가 함께 바뀜니다. */
+function paintModal(p, kind, variant) {
   const isCourse = kind === 'course';
-  const form = isForm(p);
-  const url = urlFor(p);
-  current = { item: p, kind };
-  lastFocus = document.activeElement;
-  $('#mImg').src = p.img;
-  $('#mImg').alt = p.title;
+  const v = variant || null;
+  const channel = v ? v.channel : p.channel;
+  const form = channel !== 'store';
+  const url = urlForChannel(channel, p);
+  const price = v ? v.price : p.price;
+  const was = v ? v.was : p.was;
+  const items = (v && v.items) || p.items;
+
   $('#mCat').textContent = p.tag;
-  $('#mTitle').textContent = p.title;
-  $('#mSub').textContent = p.sub;
-  $('#mNow').textContent = won(p.price);
-  $('#mWas').textContent = won(p.was) + '원';
-  $('#mPriceNote').textContent = isCourse ? '임시 표기' : (form ? '오픈 특가' : '오픈 예정가');
-  $('#mItemsTitle').textContent = p.itemsTitle || '구성';
-  $('#mPointTitle').textContent = isCourse ? '과정의 결' : '미리보기 포인트';
-  $('#mTag').textContent = form
-    ? (isCourse ? '온라인 수강 · 실기 기록 · 수료증 발급' : '구글폼 신청 · 계좌이체 · 디지털 발송')
-    : '스마트스토어 12월 오픈 · 사전 예약 DM';
-  $('#mItems').innerHTML = p.items.map(t => `<li>${t}</li>`).join('');
-  $('#mFor').innerHTML = p['for'].map(t => `<li>${t}</li>`).join('');
-  $('#mPoint').textContent = p.point;
-  $('#mBuy').innerHTML = buyLabel(p) + ' <span class="arw">→</span>';
+  $('#mNow').textContent = won(price);
+  $('#mWas').textContent = was ? won(was) + '원' : '';
+  $('#mWas').style.display = was ? '' : 'none';
+  $('#mPriceNote').textContent = isCourse ? '임시 표기'
+    : (v ? (v.priceNote || (form ? 'PDF 가격' : '실물 가격')) : (form ? '오픈 특가' : '오픈 예정가'));
+  $('#mTag').textContent = (v && v.tag)
+    ? v.tag
+    : (form
+      ? (isCourse ? '온라인 수강 · 실기 기록 · 수료증 발급' : '구글폼 신청 · 계좌이체 · 디지털 발송')
+      : '스마트스토어 12월 오픈 · 사전 예약 DM');
+  $('#mItems').innerHTML = items.map(t => `<li>${t}</li>`).join('');
+  $('#mBuy').innerHTML = buyLabel(channel) + ' <span class="arw">→</span>';
   $('#mBuy').dataset.name = p.title;
   $('#mBuy').dataset.channelUrl = url;
   if (url) { $('#mBuy').href = url; $('#mBuy').target = '_blank'; $('#mBuy').rel = 'noopener'; }
@@ -1347,11 +1413,50 @@ function openModal(p, kind = 'product') {
       + (isCourse ? modalChannel('classes', '과정 문의', '') : '')
       + modalChannel('dm', '인스타 DM', '')
     : modalChannel('store', '스마트스토어', url) + modalChannel('dm', '사전 예약 DM', '');
-  $('#mFine').textContent = form
-    ? (isCourse
-      ? '가격과 모집 일정은 임시 표기입니다. 구글폼에서 계좌이체로 신청하시면 순차적으로 안내드려요.'
-      : '구글폼에서 계좌이체로 신청하시면 확인 후 파일을 보내드려요.')
-    : '스마트스토어는 12월 오픈 예정입니다. 지금은 인스타 DM으로 사전 예약을 받아요.';
+  $('#mFine').textContent = (v && v.fine) ? v.fine
+    : (form
+      ? (isCourse
+        ? '가격과 모집 일정은 임시 표기입니다. 구글폼에서 계좌이체로 신청하시면 순차적으로 안내드려요.'
+        : '구글폼에서 계좌이체로 신청하시면 확인 후 파일을 보내드려요.')
+      : '스마트스토어는 12월 오픈 예정입니다. 지금은 인스타 DM으로 사전 예약을 받아요.');
+}
+
+function renderVariantChips(p, selected) {
+  const block = $('#mVariantBlock'), box = $('#mVariants');
+  if (!p.variants) { block.hidden = true; box.innerHTML = ''; return; }
+  block.hidden = false;
+  box.innerHTML = p.variants.map(v => `
+    <button type="button" class="m-var" data-vk="${v.key}" aria-pressed="${v.key === selected.key}">
+      <span class="v-label"><span aria-hidden="true">${v.icon || ''}</span>${v.label}</span>
+      <span class="v-price">${won(v.price)}원</span>
+    </button>`).join('');
+}
+
+function selectVariant(key) {
+  if (!current || !current.item.variants) return;
+  const p = current.item;
+  const v = p.variants.find(x => x.key === key) || p.variants[0];
+  current.variant = v;
+  renderVariantChips(p, v);
+  paintModal(p, current.kind, v);
+}
+
+function openModal(p, kind = 'product') {
+  const isCourse = kind === 'course';
+  const variant = p.variants ? p.variants[0] : null;
+  current = { item: p, kind, variant };
+  lastFocus = document.activeElement;
+  $('#mImg').src = p.img;
+  $('#mImg').alt = p.title;
+  $('#mMedia').classList.toggle('contain', p.fit === 'contain');
+  $('#mTitle').textContent = p.title;
+  $('#mSub').textContent = p.sub;
+  $('#mItemsTitle').textContent = p.itemsTitle || '구성';
+  $('#mPointTitle').textContent = isCourse ? '과정의 결' : '미리보기 포인트';
+  $('#mFor').innerHTML = p['for'].map(t => `<li>${t}</li>`).join('');
+  $('#mPoint').textContent = p.point;
+  renderVariantChips(p, variant);
+  paintModal(p, kind, variant);
 
   modal.classList.add('show');
   modal.setAttribute('aria-hidden', 'false');
@@ -1374,7 +1479,11 @@ grid.addEventListener('click', e => {
   if (p) openModal(p);
 });
 
-modal.addEventListener('click', e => { if (e.target.closest('[data-close]')) closeModal(); });
+modal.addEventListener('click', e => {
+  if (e.target.closest('[data-close]')) { closeModal(); return; }
+  const chip = e.target.closest('.m-var');
+  if (chip && current && current.item.variants) selectVariant(chip.dataset.vk);
+});
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
 });
@@ -1403,7 +1512,8 @@ $('#mBuy').addEventListener('click', e => {
   if (url) return;   // 실제 링크로 새 탭 이동
   e.preventDefault();
   const item = current && current.item;
-  toast(item && isForm(item)
+  const ch = current && current.variant ? current.variant.channel : (item && item.channel);
+  toast(ch !== 'store'
     ? '구글폼을 준비 중이에요. 지금은 인스타 DM이나 이메일로 먼저 신청받고 있어요.'
     : '스마트스토어는 12월 오픈 예정이에요. 인스타 DM으로 사전 예약을 받고 있어요.');
 });
@@ -1435,7 +1545,7 @@ function syncChannelState() {
     const fDot = $('[data-form-dot]', box), fTxt = $('[data-form-text]', box), fLink = $('[data-form-link]', box);
     if (fDot) fDot.classList.toggle('on', formOn);
     if (fTxt) fTxt.textContent = formOn
-      ? '구글폼(계좌이체)으로 01·02·04 상품과 자격증 두 과정을 바로 신청할 수 있어요.'
+      ? '구글폼(계좌이체)으로 01·02·04 상품과 03·07의 PDF, 자격증 두 과정을 바로 신청할 수 있어요.'
       : '구글폼 신청은 준비 중이에요. 지금은 인스타 DM·이메일로 먼저 신청받고 있어요.';
     if (fLink) {
       fLink.href = formOn ? GOOGLE_FORM_URL : 'https://ig.me/m/mindmove_lab';
@@ -1446,7 +1556,7 @@ function syncChannelState() {
     if (sDot) sDot.classList.toggle('on', storeOn);
     if (sTxt) sTxt.textContent = storeOn
       ? '실물 상품(03·05·06·07)은 스마트스토어에서 바로 구매하실 수 있어요.'
-      : '실물 상품(03·05·06·07)은 스마트스토어에서 12월 오픈 예정이에요. 지금은 DM으로 사전 예약을 받아요.';
+      : '실물 상품(05·06)과 03·07의 실물책은 스마트스토어에서 12월 오픈 예정이에요. 지금은 DM으로 사전 예약을 받아요.';
     if (sLink) {
       sLink.href = storeOn ? SMARTSTORE_URL : 'https://ig.me/m/mindmove_lab';
       sLink.textContent = storeOn ? '스마트스토어 열기 ↗' : '사전 예약 DM ↗';
