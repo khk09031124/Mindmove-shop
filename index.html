@@ -389,12 +389,12 @@ ul{padding:0;list-style:none}
 .m-actions{display:flex;flex-direction:column;gap:9px;margin-top:26px}
 .m-actions .btn{width:100%;padding:15px 20px;font-size:13px}
 .m-channels{display:flex;gap:8px;margin-top:10px}
-.m-channels button{
+.m-channels button,.m-channels a{
   flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;
   border:1px solid var(--line);padding:11px 6px;font-size:11.5px;color:var(--ink-2);
   transition:border-color .3s,color .3s,background .3s;
 }
-.m-channels button:hover{border-color:var(--ink-2);color:var(--ink);background:rgba(255,255,255,.5)}
+.m-channels button:hover,.m-channels a:hover{border-color:var(--ink-2);color:var(--ink);background:rgba(255,255,255,.5)}
 .m-channels button span{font-size:9px;opacity:.5}
 .m-fine{font-size:10px;color:#a49a8a;line-height:1.7;margin-top:12px}
 .m-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.1em;color:var(--olive);border:1px solid rgba(108,113,87,.3);padding:4px 9px;margin-top:18px}
@@ -837,8 +837,8 @@ ul{padding:0;list-style:none}
           </div>
           <div class="inq-actions">
             <a class="btn btn-dark" id="sendForm" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">구글폼으로 신청 <span class="arw">↗</span></a>
-            <button type="button" class="btn btn-ghost" id="sendDm">인스타 DM으로 문의 <span class="arw">↗</span></button>
-            <button type="button" class="btn btn-ghost" id="sendMail">이메일로 보내기 <span class="arw">↗</span></button>
+            <a class="btn btn-ghost" id="sendDm" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">인스타 DM으로 문의 <span class="arw">↗</span></a>
+            <a class="btn btn-ghost" id="sendMail" href="mailto:akd7410@naver.com">이메일로 보내기 <span class="arw">↗</span></a>
           </div>
           <p class="inq-fine">구글폼은 계좌이체로 바로 신청하실 수 있어요. DM은 인스타그램 앱이 열리고 작성 내용이 자동으로 복사되니, 열린 DM 창에 붙여넣어 주세요.<br>이메일은 메일 앱이 열리며 제목과 내용이 미리 채워집니다. (akd7410@naver.com)</p>
         </form>
@@ -1013,11 +1013,10 @@ ul{padding:0;list-style:none}
         <p id="mPoint"></p>
       </div>
       <div class="m-actions">
-        <button class="btn btn-dark" id="mBuy">구글폼으로 바로 신청 <span class="arw">→</span></button>
+        <a class="btn btn-dark" id="mBuy" href="#" role="button">구글폼으로 바로 신청 <span class="arw">→</span></a>
         <div class="m-channels" id="mChannels">
-          <button data-ch="form">구글폼 신청 <span>↗</span></button>
-          <button data-ch="store">스마트스토어 <span>↗</span></button>
-          <button data-ch="dm">인스타 DM <span>↗</span></button>
+          <a data-ch="form" href="#">구글폼 신청 <span>↗</span></a>
+          <a data-ch="dm" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">인스타 DM <span>↗</span></a>
         </div>
         <p class="m-fine" id="mFine">디지털 자료와 자격증 과정은 구글폼에서 계좌이체로 신청하실 수 있어요.</p>
       </div>
@@ -1304,7 +1303,11 @@ let lastFocus = null;
 
 let current = null;
 
-const modalChannel = (key, label, url) => `<button data-ch="${key}" data-channel-url="${url || ''}">${label} <span>↗</span></button>`;
+const modalChannel = (key, label, url) => url
+  ? `<a data-ch="${key}" data-channel-url="${url}" href="${url}" target="_blank" rel="noopener">${label} <span>↗</span></a>`
+  : (key === 'dm'
+    ? `<a data-ch="dm" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">${label} <span>↗</span></a>`
+    : `<button data-ch="${key}" data-channel-url="">${label} <span>↗</span></button>`);
 
 function buyLabel(p) {
   if (isForm(p)) return '구글폼으로 바로 신청';
@@ -1324,7 +1327,7 @@ function openModal(p, kind = 'product') {
   $('#mSub').textContent = p.sub;
   $('#mNow').textContent = won(p.price);
   $('#mWas').textContent = won(p.was) + '원';
-  $('#mPriceNote').textContent = isCourse ? '임시 표기' : '오픈 특가';
+  $('#mPriceNote').textContent = isCourse ? '임시 표기' : (form ? '오픈 특가' : '오픈 예정가');
   $('#mItemsTitle').textContent = p.itemsTitle || '구성';
   $('#mPointTitle').textContent = isCourse ? '과정의 결' : '미리보기 포인트';
   $('#mTag').textContent = form
@@ -1336,6 +1339,8 @@ function openModal(p, kind = 'product') {
   $('#mBuy').innerHTML = buyLabel(p) + ' <span class="arw">→</span>';
   $('#mBuy').dataset.name = p.title;
   $('#mBuy').dataset.channelUrl = url;
+  if (url) { $('#mBuy').href = url; $('#mBuy').target = '_blank'; $('#mBuy').rel = 'noopener'; }
+  else { $('#mBuy').removeAttribute('href'); $('#mBuy').removeAttribute('target'); }
   $('#mChannels').innerHTML = form
     ? modalChannel('form', '구글폼 신청', url)
       + (isCourse ? modalChannel('classes', '과정 문의', '') : '')
@@ -1394,7 +1399,8 @@ function toast(msg) {
 
 $('#mBuy').addEventListener('click', e => {
   const url = e.currentTarget.dataset.channelUrl;
-  if (url) { window.open(url, '_blank', 'noopener'); return; }
+  if (url) return;   // 실제 링크로 새 탭 이동
+  e.preventDefault();
   const item = current && current.item;
   toast(item && isForm(item)
     ? '구글폼을 준비 중이에요. 지금은 인스타 DM이나 이메일로 먼저 신청받고 있어요.'
@@ -1405,15 +1411,17 @@ $('#mChannels').addEventListener('click', e => {
   const b = e.target.closest('[data-ch]');
   if (!b) return;
   const ch = b.dataset.ch;
-  if (ch === 'dm') { window.open('https://ig.me/m/mindmove_lab', '_blank', 'noopener'); return; }
+  if (ch === 'dm') return;   // 실제 링크로 이동
   if (ch === 'classes') {
+    e.preventDefault();
     closeModal();
     document.getElementById('classes').scrollIntoView({ behavior: 'smooth', block: 'start' });
     setTimeout(() => toast('아래 문의 폼에서 분야를 고르고 내용을 남겨 주세요.'), 600);
     return;
   }
   const url = b.dataset.channelUrl || (ch === 'form' ? GOOGLE_FORM_URL : SMARTSTORE_URL);
-  if (url) { window.open(url, '_blank', 'noopener'); return; }
+  if (url) return;   // 실제 링크로 이동
+  e.preventDefault();
   toast(ch === 'form'
     ? '구글폼은 준비 중이에요. 인스타 DM이나 이메일로 먼저 신청받고 있어요.'
     : '스마트스토어는 12월 오픈 예정이에요. 인스타 DM으로 사전 예약을 받고 있어요.');
@@ -1511,20 +1519,19 @@ function requireField() {
   return false;
 }
 
-$('#sendDm').addEventListener('click', () => {
-  if (!requireField()) return;
+$('#sendDm').addEventListener('click', e => {
+  if (!requireField()) { e.preventDefault(); return; }
   const copied = copyText(inquiryMessage());
-  window.open('https://ig.me/m/mindmove_lab', '_blank', 'noopener');
   toast(copied
     ? '문의 내용을 복사했어요. 열린 인스타 DM 창에 붙여넣기만 하면 됩니다.'
     : '인스타 DM 창을 열었어요. 내용은 직접 복사해 주세요.');
 });
 
-$('#sendMail').addEventListener('click', () => {
-  if (!requireField()) return;
+$('#sendMail').addEventListener('click', e => {
+  if (!requireField()) { e.preventDefault(); return; }
   const name = ($('#iqName').value || '').trim();
   const subject = '[숨결샘] ' + inquiry.field + ' 수업 문의' + (name ? ' — ' + name : '');
-  window.location.href = 'mailto:akd7410@naver.com?subject=' + encodeURIComponent(subject)
+  e.currentTarget.href = 'mailto:akd7410@naver.com?subject=' + encodeURIComponent(subject)
     + '&body=' + encodeURIComponent(inquiryMessage());
   toast('메일 앱을 열었어요. 내용을 확인하고 보내 주세요.');
 });
