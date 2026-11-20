@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>숨결샘 — Mind &amp; Move Lab | 마음과 움직임이 머무는 자리</title>
-<meta name="description" content="아동심리학 박사수료 심리상담사 숨결샘이 직접 기획하고 그린 마음·움직임·예술 아카이브. 요가·필라테스 시퀀스북, ACT 부모교육 자료집, 색채 타로카드, 아트 만다라 컬러링북.">
+<meta name="description" content="아동심리학 박사수료 심리상담사 숨결샘이 직접 기획하고 그린 마음·움직임·예술 아카이브. 요가·필라테스 시퀀스북, ACT 부모교육 자료집, 색채 타로카드, 아트 만다라 컬러링북. ASAR 요가·ACT 필라테라피 온라인 자격증 과정과 야외·임산부 요가, 기업강의 문의.">
 <meta name="theme-color" content="#FBF7F0">
 <meta property="og:title" content="숨결샘 — Mind &amp; Move Lab">
 <meta property="og:description" content="마음과 움직임이 머무는 자리 · 마음·움직임·예술 아카이브">
@@ -95,7 +95,7 @@ ul{padding:0;list-style:none}
 .brand{display:flex;align-items:baseline;gap:10px}
 .brand-name{font-family:var(--serif);font-size:20px;letter-spacing:.02em}
 .brand-sub{font-size:8.5px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;transform:translateY(-1px)}
-.nav-links{display:flex;align-items:center;gap:34px;font-size:13px;letter-spacing:.02em;color:var(--ink-2)}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:12.5px;letter-spacing:.02em;color:var(--ink-2)}
 .nav-links a{position:relative;padding-block:4px;transition:color .3s}
 .nav-links a::after{
   content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--ink);
@@ -120,7 +120,7 @@ ul{padding:0;list-style:none}
   display:none;overflow:hidden;max-height:0;transition:max-height .5s var(--ease);
   border-bottom:1px solid var(--line-soft);background:rgba(251,247,240,.97);
 }
-.mobile-menu.open{max-height:340px}
+.mobile-menu.open{max-height:600px}
 .mobile-menu ul{padding:8px 0 22px}
 .mobile-menu li{border-top:1px solid var(--line-soft)}
 .mobile-menu li:first-child{border-top:0}
@@ -227,6 +227,10 @@ ul{padding:0;list-style:none}
   padding:6px 11px;border-radius:2px;text-transform:uppercase;
 }
 .card-badge.soon{color:#7a725f;background:rgba(245,238,227,.92);border:1px solid rgba(255,255,255,.7)}
+.card-badge.form{background:rgba(44,41,37,.9);color:var(--paper);letter-spacing:.1em;border:1px solid rgba(44,41,37,.9)}
+.card-channel{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;letter-spacing:.03em;color:var(--ink-2)}
+.card-channel::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--olive);flex:none}
+.card-channel.store::before{background:#c6b193}
 .card-idx{
   position:absolute;top:12px;right:12px;z-index:2;display:grid;place-content:center;
   width:30px;height:30px;border-radius:50%;
@@ -410,6 +414,110 @@ ul{padding:0;list-style:none}
 .js .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
 
+/* ---------- 온라인 자격증 과정 ---------- */
+.cert{border-top:1px solid var(--line-soft);padding-top:96px}
+.cert-list{display:flex;flex-direction:column;gap:22px;margin-top:46px}
+.cert-card{
+  display:grid;grid-template-columns:.4fr .6fr;text-align:left;
+  background:rgba(255,255,255,.46);border:1px solid var(--line-soft);overflow:hidden;
+  transition:box-shadow .5s var(--ease),transform .5s var(--ease),background .5s var(--ease);
+}
+.cert-card:hover{box-shadow:var(--shadow-m);transform:translateY(-3px);background:rgba(255,255,255,.68)}
+.cert-media{position:relative;overflow:hidden;background:var(--paper-3);min-height:280px}
+.cert-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.cert-card:hover .cert-media img{transform:scale(1.04)}
+.cert-no{
+  position:absolute;top:15px;left:15px;z-index:2;display:grid;place-content:center;width:34px;height:34px;border-radius:50%;
+  background:rgba(251,247,240,.9);font-family:var(--serif);font-size:11px;color:var(--ink-2);letter-spacing:.04em;
+  backdrop-filter:blur(4px);
+}
+.cert-body{padding:clamp(24px,3.2vw,42px);display:flex;flex-direction:column}
+.cert-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cert-kicker{font-size:9.5px;letter-spacing:.2em;color:var(--olive);text-transform:uppercase}
+.cert-state{font-size:9.5px;letter-spacing:.1em;color:#7a725f;border:1px solid rgba(44,41,37,.16);padding:3px 8px;border-radius:2px;background:rgba(245,238,227,.7)}
+.cert-title{font-family:var(--serif);font-weight:400;font-size:clamp(21px,2.3vw,28px);line-height:1.5;letter-spacing:-.03em;margin-top:14px;display:block}
+.cert-sub{font-size:13px;color:var(--muted);line-height:1.75;margin-top:8px;max-width:46ch;display:block}
+.cert-facts{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.cert-facts span{font-size:11px;letter-spacing:.02em;color:var(--ink-2);background:rgba(239,230,216,.62);padding:5px 11px;border-radius:999px}
+.cert-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-top:auto;padding-top:24px;flex-wrap:wrap}
+.cert-price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.cert-price .now{font-size:14.5px;letter-spacing:-.01em}
+.cert-price .now b{font-weight:500;font-size:19px}
+.cert-price .was{font-size:11.5px;color:#a49a8a;text-decoration:line-through}
+.cert-price .note{font-size:10px;letter-spacing:.06em;color:var(--clay)}
+.cert-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.cert-more{
+  display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;
+  padding:11px 20px;font-size:12.5px;color:var(--ink-2);transition:border-color .35s var(--ease),color .35s var(--ease),background .35s;
+}
+.cert-card:hover .cert-more{border-color:var(--ink);color:var(--ink)}
+.cert-more .arw{font-size:11px;opacity:.65}
+.cert-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px;border-top:1px solid var(--line);padding-top:28px}
+.cert-flow .num{font-family:var(--serif);font-size:11px;letter-spacing:.16em;color:var(--olive)}
+.cert-flow h4{font-family:var(--serif);font-size:15px;font-weight:400;margin-top:7px;letter-spacing:-.02em}
+.cert-flow p{font-size:12.5px;color:var(--muted);line-height:1.75;margin-top:6px;max-width:30ch}
+
+/* ---------- 스마트스토어 연결 상태 ---------- */
+.store-state{display:flex;flex-direction:column;gap:7px;margin-top:20px;font-size:11.5px;color:var(--muted);line-height:1.7}
+.ss-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0}
+.store-state .dot{width:6px;height:6px;border-radius:50%;background:var(--clay);flex:none}
+.store-state .dot.on{background:var(--olive)}
+.store-state a{border-bottom:1px solid var(--line);padding-bottom:1px;color:var(--ink-2);transition:border-color .3s,color .3s}
+.store-state a:hover{border-color:var(--ink);color:var(--ink)}
+
+/* ---------- 클래스 · 특강 · 기업강의 문의 ---------- */
+.classes{background:var(--paper-3);border-block:1px solid var(--line-soft);position:relative;overflow:hidden}
+.classes::before{
+  content:"";position:absolute;top:-18%;right:-12%;width:min(560px,60vw);height:min(560px,60vw);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.6),transparent 66%);pointer-events:none;
+}
+.classes-grid{position:relative;display:grid;grid-template-columns:.86fr 1.14fr;gap:clamp(30px,4.5vw,60px);margin-top:44px;align-items:start}
+.picks{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pick{
+  display:flex;flex-direction:column;gap:4px;text-align:left;padding:15px 16px;
+  border:1px solid rgba(44,41,37,.14);background:rgba(251,247,240,.55);
+  transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease);
+}
+.pick:hover{transform:translateY(-2px);border-color:rgba(44,41,37,.32)}
+.pick .p-no{font-family:var(--serif);font-size:10px;letter-spacing:.14em;color:var(--olive)}
+.pick .p-name{font-family:var(--serif);font-size:15px;letter-spacing:-.02em;line-height:1.45}
+.pick .p-desc{font-size:11px;color:var(--muted);line-height:1.6}
+.pick[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.pick[aria-pressed="true"] .p-no{color:#B9BC9C}
+.pick[aria-pressed="true"] .p-desc{color:rgba(251,247,240,.62)}
+.pick.wide{grid-column:span 2}
+.inq{
+  background:rgba(251,247,240,.88);border:1px solid rgba(255,255,255,.75);box-shadow:var(--shadow-m);
+  padding:clamp(22px,2.8vw,34px);
+}
+.inq-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.inq-head h3{font-family:var(--serif);font-weight:400;font-size:19px;letter-spacing:-.03em}
+.inq-head span{font-size:10.5px;letter-spacing:.06em;color:var(--muted)}
+.inq-body{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:span 2}
+.field label,.field .lbl{font-size:9.5px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+.field input,.field textarea{
+  font:inherit;font-size:13.5px;color:var(--ink);background:rgba(255,255,255,.6);
+  border:1px solid rgba(44,41,37,.12);padding:11px 13px;border-radius:2px;width:100%;
+  transition:border-color .3s,background .3s;
+}
+.field input::placeholder,.field textarea::placeholder{color:#b3a998}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--olive);background:#fff}
+.field textarea{min-height:104px;resize:vertical;line-height:1.7}
+.inq-picked{
+  font-size:13.5px;color:#a49a8a;padding:11px 13px;border:1px dashed rgba(44,41,37,.18);
+  background:rgba(255,255,255,.35);line-height:1.5;
+}
+.inq-picked.on{color:var(--ink);border-style:solid;border-color:rgba(108,113,87,.45);background:rgba(108,113,87,.08)}
+.inq-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-top:18px}
+.inq-actions .btn{width:100%;padding:14px 12px;font-size:12.5px}
+.inq-fine{font-size:10.5px;color:#a49a8a;line-height:1.75;margin-top:13px}
+
+@media(max-width:1200px) and (min-width:1081px){
+  .nav-links{gap:20px;font-size:12px}
+}
+
 /* ---------- 반응형 ---------- */
 @media(max-width:1080px){
   .nav-links{display:none}
@@ -425,6 +533,9 @@ ul{padding:0;list-style:none}
   .story-seal b{font-size:13px}
   .faq-grid{grid-template-columns:1fr;gap:28px}
   .foot-top{gap:40px}
+  .cert-card{grid-template-columns:.44fr .56fr}
+  .cert-flow{grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .classes-grid{grid-template-columns:1fr;gap:34px}
 }
 @media(max-width:760px){
   body{font-size:14.5px}
@@ -495,14 +606,32 @@ ul{padding:0;list-style:none}
   .modal-close{top:10px;right:10px;background:rgba(251,247,240,.92)}
   .toast{bottom:22px;font-size:11.5px;padding:12px 18px}
   .foot-bot{font-size:10px}
+  .cert{padding-top:64px}
+  .cert-list{gap:16px;margin-top:30px}
+  .cert-card{grid-template-columns:1fr}
+  .cert-media{min-height:0;aspect-ratio:4/3}
+  .cert-body{padding:22px 20px 24px}
+  .cert-foot{padding-top:18px}
+  .cert-actions{width:100%}
+  .cert-more{width:100%;justify-content:center}
+  .cert-flow{grid-template-columns:1fr;gap:16px;padding-top:22px;margin-top:30px}
+  .cert-flow p{max-width:none}
+  .picks{grid-template-columns:1fr;gap:8px}
+  .pick.wide{grid-column:auto}
+  .pick{padding:13px 15px}
+  .inq-body{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .inq-actions{grid-template-columns:1fr}
+  .inq{padding:20px 18px 22px}
+  .store-state{font-size:11px}
 }
 </style>
 </head>
 <body>
 
 <div class="notice">
-  <span class="n-full">공식 스토어 오픈 준비 중 <span>·</span> <b>오픈 특가 알림</b>을 신청하면 가장 먼저 안내드려요 <span>·</span> 전 상품 12월 중 오픈 예정</span>
-  <span class="n-short"><b>오픈 특가 알림</b> 신청하면 가장 먼저 안내드려요</span>
+  <span class="n-full">디지털 자료·자격증 과정은 <b>구글폼으로 바로 신청</b> <span>·</span> 실물 상품은 <b>12월 스마트스토어 오픈</b> 예정 <span>·</span> 오픈 소식은 DM으로 먼저 안내드려요</span>
+  <span class="n-short"><b>디지털·자격증은 구글폼</b>, 실물은 12월 스마트스토어 오픈</span>
 </div>
 
 <header class="nav" id="nav">
@@ -513,6 +642,8 @@ ul{padding:0;list-style:none}
     </a>
     <nav class="nav-links" aria-label="주요 메뉴">
       <a href="#collection">컬렉션</a>
+      <a href="#certification">자격증 과정</a>
+      <a href="#classes">특강·강의 문의</a>
       <a href="#story">브랜드 스토리</a>
       <a href="#faq">자주 묻는 질문</a>
       <a href="https://www.instagram.com/mindmove_lab/" target="_blank" rel="noopener">@mindmove_lab ↗</a>
@@ -526,9 +657,11 @@ ul{padding:0;list-style:none}
     <div class="wrap">
       <ul>
         <li><a href="#collection">컬렉션 <span>01</span></a></li>
-        <li><a href="#story">브랜드 스토리 <span>02</span></a></li>
-        <li><a href="#faq">자주 묻는 질문 <span>03</span></a></li>
-        <li><a href="#open">오픈 알림 신청 <span>04</span></a></li>
+        <li><a href="#certification">자격증 과정 <span>02</span></a></li>
+        <li><a href="#classes">특강·강의 문의 <span>03</span></a></li>
+        <li><a href="#story">브랜드 스토리 <span>04</span></a></li>
+        <li><a href="#faq">자주 묻는 질문 <span>05</span></a></li>
+        <li><a href="#open">오픈 알림 신청 <span>06</span></a></li>
         <li><a href="https://www.instagram.com/mindmove_lab/" target="_blank" rel="noopener">인스타그램 @mindmove_lab <span>↗</span></a></li>
       </ul>
     </div>
@@ -550,7 +683,7 @@ ul{padding:0;list-style:none}
           <a class="link-underline" href="https://www.instagram.com/mindmove_lab/" target="_blank" rel="noopener">@mindmove_lab 팔로우 ↗</a>
         </div>
         <div class="hero-meta">
-          <span>7 Collections</span><i></i><span>Digital · Object</span><i></i><span>Opening 2026.12</span>
+          <span>7 Collections</span><i></i><span>2 Online Courses</span><i></i><span>Digital · Object</span><i></i><span>Opening 2026.12</span>
         </div>
       </div>
       <div class="hero-visual">
@@ -596,7 +729,120 @@ ul{padding:0;list-style:none}
 
       <div class="grid" id="productGrid"></div>
 
-      <p class="small" style="margin-top:34px;color:#a49a8a">표시된 가격은 오픈 특가 예시이며, 실제 판매 가격은 스마트스토어·크몽 오픈 시 확정됩니다.</p>
+      <p class="small" style="margin-top:34px;color:#a49a8a">표시된 가격은 오픈 특가 예시이며, 실제 판매 가격은 신청 시 확정됩니다. · 디지털 자료·자격증 과정은 <b style="font-weight:400;color:var(--ink-2)">구글폼(계좌이체)</b>, 실물 상품은 <b style="font-weight:400;color:var(--ink-2)">네이버 스마트스토어</b>에서 만나요.</p>
+
+      <div class="store-state" data-channel-state>
+        <p class="ss-row">
+          <span class="dot on" data-form-dot></span>
+          <span data-form-text>구글폼(계좌이체)으로 디지털 자료와 자격증 과정을 바로 신청할 수 있어요.</span>
+          <a data-form-link href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">신청하기 ↗</a>
+        </p>
+        <p class="ss-row">
+          <span class="dot" data-store-dot></span>
+          <span data-store-text>실물 상품은 네이버 스마트스토어에서 12월 오픈 예정이에요. 지금은 DM으로 사전 예약을 받아요.</span>
+          <a data-store-link href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">사전 예약 DM ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATION -->
+  <section class="section cert" id="certification">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Certification — Online Course</p>
+          <h2 class="h2">온라인으로,<br>천천히 자격까지</h2>
+        </div>
+        <p class="lede">두 과정 모두 온라인으로 수강합니다.<br>정해진 기간 안에 원하는 시간에 듣고, 실기 기록을 남기면 수료증을 드려요.</p>
+      </div>
+
+      <div class="cert-list" id="certList"></div>
+
+      <div class="cert-flow reveal">
+        <div>
+          <span class="num">01</span>
+          <h4>수강 신청</h4>
+          <p>구글폼으로 신청하고 계좌이체로 수강권을 결제하면, 학습 안내와 파트별 영상 링크를 보내드려요.</p>
+        </div>
+        <div>
+          <span class="num">02</span>
+          <h4>온라인 수강</h4>
+          <p>수강 기간 안에 반복해서 듣고, 파트별 워크시트에 몸의 느낌을 기록해요.</p>
+        </div>
+        <div>
+          <span class="num">03</span>
+          <h4>수료 · 수료증</h4>
+          <p>전 파트 수강과 실기 기록을 마치면 수료증을 발급합니다. 자격 발급 기준은 과정별로 안내드려요.</p>
+        </div>
+      </div>
+
+      <div class="store-state" data-channel-state>
+        <p class="ss-row">
+          <span class="dot on" data-form-dot></span>
+          <span data-form-text>구글폼(계좌이체)으로 수강 신청을 받을 예정이에요.</span>
+          <a data-form-link href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">신청하기 ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASSES -->
+  <section class="section classes" id="classes">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Classes · Lectures</p>
+          <h2 class="h2">마음이 움직이는<br>수업을 함께</h2>
+        </div>
+        <p class="lede">야외에서, 온라인으로, 임산부와 기업까지.<br>현장과 사람에 맞춰 설계한 요가·필라테라피 수업을 진행합니다.</p>
+      </div>
+
+      <div class="classes-grid">
+        <div class="reveal">
+          <div class="picks" id="classPicks"></div>
+          <p class="small" style="margin-top:20px">일정·장소·인원·예산은 상담 후 확정됩니다.<br>편하게 문의해 주세요.</p>
+        </div>
+
+        <form class="inq reveal" id="inqForm" novalidate>
+          <div class="inq-head">
+            <h3>수업 문의 남기기</h3>
+            <span>보통 1~2일 안에 답장드려요</span>
+          </div>
+          <div class="inq-body">
+            <div class="field full">
+              <span class="lbl">분야</span>
+              <p class="inq-picked" id="iqPicked">위에서 수업 분야를 선택해 주세요</p>
+            </div>
+            <div class="field">
+              <label for="iqWhen">희망 일정</label>
+              <input id="iqWhen" type="text" placeholder="예: 12월 둘째 주 토요일 오전">
+            </div>
+            <div class="field">
+              <label for="iqPeople">희망 인원</label>
+              <input id="iqPeople" type="text" placeholder="예: 8명 · 20명">
+            </div>
+            <div class="field">
+              <label for="iqName">성함 · 단체명</label>
+              <input id="iqName" type="text" placeholder="예: 김희경 / ○○복지관">
+            </div>
+            <div class="field">
+              <label for="iqContact">연락처</label>
+              <input id="iqContact" type="text" placeholder="전화 또는 이메일">
+            </div>
+            <div class="field full">
+              <label for="iqMemo">문의 내용</label>
+              <textarea id="iqMemo" placeholder="수업 장소·대상·예산 등 편하게 적어 주세요"></textarea>
+            </div>
+          </div>
+          <div class="inq-actions">
+            <a class="btn btn-dark" id="sendForm" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">구글폼으로 신청 <span class="arw">↗</span></a>
+            <button type="button" class="btn btn-ghost" id="sendDm">인스타 DM으로 문의 <span class="arw">↗</span></button>
+            <button type="button" class="btn btn-ghost" id="sendMail">이메일로 보내기 <span class="arw">↗</span></button>
+          </div>
+          <p class="inq-fine">구글폼은 계좌이체로 바로 신청하실 수 있어요. DM은 인스타그램 앱이 열리고 작성 내용이 자동으로 복사되니, 열린 DM 창에 붙여넣어 주세요.<br>이메일은 메일 앱이 열리며 제목과 내용이 미리 채워집니다. (akd7410@naver.com)</p>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -647,14 +893,14 @@ ul{padding:0;list-style:none}
   <section class="open-band" id="open">
     <div class="wrap open-in">
       <div>
-        <p class="eyebrow">Opening Soon</p>
-        <h2>12월, 작은 상점을 엽니다</h2>
-        <p>오픈 특가는 알림을 신청한 분께 가장 먼저 열립니다. 인스타그램 DM으로 ‘숨결샘’ 한 마디만 남겨 주세요.</p>
+        <p class="eyebrow">Opening</p>
+        <h2>디지털은 바로,<br>실물은 12월에</h2>
+        <p>디지털 자료와 자격증 과정은 구글폼으로 바로 신청받고, 실물 상품은 12월 스마트스토어에서 만나요. 먼저 알고 싶다면 인스타그램 DM으로 ‘숨결샘’ 한 마디만 남겨 주세요.</p>
       </div>
       <div class="open-actions">
         <a class="btn btn-light" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">인스타 DM으로 알림 신청 <span class="arw">↗</span></a>
         <a class="btn btn-outline-light" href="https://www.instagram.com/mindmove_lab/" target="_blank" rel="noopener">@mindmove_lab 팔로우</a>
-        <p class="open-fine">결제와 배송은 스마트스토어·크몽에서 이루어질 예정입니다.<br>PDF 자료는 결제 후 메일로 전달됩니다.</p>
+        <p class="open-fine">디지털 자료·자격증은 구글폼 신청 후 계좌이체로 진행되며, 확인 후 파일을 보내드려요.<br>실물 상품은 12월 스마트스토어에서 배송됩니다.</p>
       </div>
     </div>
   </section>
@@ -706,6 +952,8 @@ ul{padding:0;list-style:none}
           <h5>Shop</h5>
           <ul>
             <li><a href="#collection">전체 컬렉션</a></li>
+            <li><a href="#certification">온라인 자격증 과정</a></li>
+            <li><a href="#classes">수업 · 특강 · 기업강의</a></li>
             <li><a href="#open">오픈 알림 신청</a></li>
             <li><a href="#faq">자주 묻는 질문</a></li>
           </ul>
@@ -722,7 +970,8 @@ ul{padding:0;list-style:none}
           <h5>Contact</h5>
           <ul>
             <li><a href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">DM으로 문의하기</a></li>
-            <li><a href="#open">기관·단체 구매</a></li>
+            <li><a href="mailto:akd7410@naver.com">이메일 문의</a></li>
+            <li><a href="#classes">수업 · 기업강의 문의</a></li>
           </ul>
         </div>
       </div>
@@ -747,12 +996,12 @@ ul{padding:0;list-style:none}
       <div class="m-price">
         <span class="now"><b id="mNow"></b>원</span>
         <span class="was" id="mWas"></span>
-        <span class="off">오픈 특가</span>
+        <span class="off" id="mPriceNote">오픈 특가</span>
       </div>
       <span class="m-tag" id="mTag"></span>
       <div class="m-rule"></div>
       <div class="m-block">
-        <h6>구성</h6>
+        <h6 id="mItemsTitle">구성</h6>
         <ul id="mItems"></ul>
       </div>
       <div class="m-block">
@@ -760,17 +1009,17 @@ ul{padding:0;list-style:none}
         <ul id="mFor"></ul>
       </div>
       <div class="m-block">
-        <h6>미리보기 포인트</h6>
+        <h6 id="mPointTitle">미리보기 포인트</h6>
         <p id="mPoint"></p>
       </div>
       <div class="m-actions">
-        <button class="btn btn-dark" id="mBuy">출시 알림 신청 <span class="arw">→</span></button>
-        <div class="m-channels">
-          <button data-ch="스마트스토어">스마트스토어 <span>↗</span></button>
-          <button data-ch="크몽">크몽 <span>↗</span></button>
-          <button data-ch="instagram">인스타 DM <span>↗</span></button>
+        <button class="btn btn-dark" id="mBuy">구글폼으로 바로 신청 <span class="arw">→</span></button>
+        <div class="m-channels" id="mChannels">
+          <button data-ch="form">구글폼 신청 <span>↗</span></button>
+          <button data-ch="store">스마트스토어 <span>↗</span></button>
+          <button data-ch="dm">인스타 DM <span>↗</span></button>
         </div>
-        <p class="m-fine">결제 링크는 오픈일에 연결됩니다. 지금 신청하시면 오픈 특가를 가장 먼저 안내드려요.</p>
+        <p class="m-fine" id="mFine">디지털 자료와 자격증 과정은 구글폼에서 계좌이체로 신청하실 수 있어요.</p>
       </div>
     </div>
   </div>
@@ -787,7 +1036,7 @@ document.documentElement.classList.add('js');
    ============================================================ */
 const PRODUCTS = [
   {
-    id: 1, no: '01', cat: 'sticker', catLabel: 'Emoticon · Sticker',
+    id: 1, no: '01', cat: 'sticker', catLabel: 'Emoticon · Sticker', channel: 'form',
     title: '이모티콘 & 스티커',
     sub: '요가·필라테스 동작을 담은 손그림 스티커 세트',
     desc: '매일의 몸을 위한 작은 신호, 24가지 동작',
@@ -799,7 +1048,7 @@ const PRODUCTS = [
     point: '동작의 이름이 아니라 몸의 느낌으로 캡션을 달았습니다. 보내는 사람의 하루가 조금 가벼워지도록.'
   },
   {
-    id: 2, no: '02', cat: 'digital', catLabel: 'Digital PDF',
+    id: 2, no: '02', cat: 'digital', catLabel: 'Digital PDF', channel: 'form',
     title: '놀이 · 노인 · 미술치료 수업 자료집',
     sub: '현장에서 바로 쓰는 세 가지 결의 활동지',
     desc: '활동지 60매와 회기 진행 가이드',
@@ -811,7 +1060,7 @@ const PRODUCTS = [
     point: '한 회기를 끝까지 끌고 갈 수 있도록 예상 반응과 대응 멘트까지 적었습니다. A4 흑백 인쇄에 맞춰 여백을 잡았어요.'
   },
   {
-    id: 3, no: '03', cat: 'digital', catLabel: 'Digital PDF · Book',
+    id: 3, no: '03', cat: 'digital', catLabel: 'Digital PDF · Book', channel: 'store',
     title: '요가 / 필라테스 시퀀스북',
     sub: 'ASAR 요가 100 · ACT 필라테라피 120 기반',
     desc: '동작의 배열과 호흡을 한 장에 담은 강사용 시퀀스',
@@ -823,7 +1072,7 @@ const PRODUCTS = [
     point: '한 장에 한 시퀀스. 눈으로 따라가면 그대로 수업이 되도록 배열했습니다.'
   },
   {
-    id: 4, no: '04', cat: 'digital', catLabel: 'Digital PDF',
+    id: 4, no: '04', cat: 'digital', catLabel: 'Digital PDF', channel: 'form',
     title: 'ACT 부모교육 자료집북',
     sub: '감정을 몸과 말로 다독이는 실천 워크북',
     desc: '수용전념치료(ACT) 관점으로 다시 쓴 8회기',
@@ -835,7 +1084,7 @@ const PRODUCTS = [
     point: '“아이를 바꾸는” 대신 “나의 반응을 살피는” 질문으로 채웠습니다. 혼자 써도, 모임에서 함께 써도 좋습니다.'
   },
   {
-    id: 5, no: '05', cat: 'object', catLabel: 'Object',
+    id: 5, no: '05', cat: 'object', catLabel: 'Object', channel: 'store',
     title: '요가동작 카드 · 요가 캘린더 액자',
     sub: '벽과 책상 위의 작은 리마인더',
     desc: '하루 한 동작, 눈에 들어오는 자리에',
@@ -847,7 +1096,7 @@ const PRODUCTS = [
     point: '카드에는 동작 그림과 한 줄 문장만. 액자는 매달 한 장씩 바꿔 끼우면 됩니다.'
   },
   {
-    id: 6, no: '06', cat: 'object', catLabel: 'Object',
+    id: 6, no: '06', cat: 'object', catLabel: 'Object', channel: 'store',
     title: '색채 타로카드',
     sub: '색으로 읽는 오늘의 마음',
     desc: '컬러와 상징으로 스스로를 살피는 40장',
@@ -859,7 +1108,7 @@ const PRODUCTS = [
     point: '정답을 말해 주는 카드가 아니라, 질문을 건네는 카드입니다. 색 이름과 감정 단어를 함께 적어 두었어요.'
   },
   {
-    id: 7, no: '07', cat: 'object', catLabel: 'Object · Digital',
+    id: 7, no: '07', cat: 'object', catLabel: 'Object · Digital', channel: 'store',
     title: '아트 만다라 컬러링북',
     sub: '비우고 채우는 30분',
     desc: '손을 움직여 마음을 내려놓는 시간',
@@ -876,13 +1125,89 @@ const won = n => n.toLocaleString('ko-KR');
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
+/* ============================================================
+   판매 채널 — 두 URL만 채우면 전 버튼이 한 번에 연결됩니다.
+   1) 구글폼 신청 (계좌이체 · 즉시 신청) → 01 · 02 · 04 · 자격증 2종 · 클래스 문의
+   2) 네이버 스마트스토어 (실물 배송 · 오픈 예정) → 03 · 05 · 06 · 07
+   ============================================================ */
+const GOOGLE_FORM_URL = '';   // 예: 'https://forms.gle/…'  — 채우면 ‘구글폼으로 바로 신청’이 연결됩니다.
+const SMARTSTORE_URL = '';    // 예: 'https://smartstore.naver.com/sumgyeolsaem' — 채우면 ‘스마트스토어’가 연결됩니다.
+const PER_ITEM_URL = {};      // 상품별 개별 링크가 필요할 때만: { p3: 'https://smartstore.naver.com/…/products/1234' }
+
+const itemKey = item => item.key || ('p' + item.id);
+const isForm = item => item.channel !== 'store';
+const urlFor = item => PER_ITEM_URL[itemKey(item)] || (isForm(item) ? GOOGLE_FORM_URL : SMARTSTORE_URL);
+
+/* ============================================================
+   온라인 자격증 과정 — 가격·문구는 여기서 고치면 카드·모달이 함께 바뀝니다.
+   (가격은 임시 표기입니다)
+   ============================================================ */
+const COURSES = [
+  {
+    key: 'c1', no: '01', catLabel: 'ASAR YOGA 100 · 5 PARTS', channel: 'form',
+    title: 'ASAR 요가 온라인 자격증 과정',
+    sub: '오감으로 다시 세운 100동작, 소마틱 아사나 수련',
+    img: 'assets/c1-asar-cert.jpg',
+    tag: '온라인 수강 · 100동작',
+    price: 420000, was: 520000, status: 'prep',
+    facts: ['5파트 100동작', '온라인 수강', '수료증 발급'],
+    itemsTitle: '커리큘럼',
+    items: [
+      '1단계 시각 · 마음열기 — 몸을 보는 감각부터 (20동작)',
+      '2단계 촉각 · 그라운딩 — 바닥과 손끝으로 중심 잡기 (20동작)',
+      '3단계 청각 · 리듬 — 호흡과 소리로 흐름 만들기 (20동작)',
+      '4단계 후각 · 호흡 — 들숨과 냄새로 이완 깊이 넣기 (20동작)',
+      '5단계 통합 · 이완 — 100동작을 잇는 시퀀스 구성 (20동작)',
+      '수료 기준: 전 파트 수강 + 실기 기록 1회 · 수료증 발급'
+    ],
+    for: [
+      '요가·필라테스 강사로 수업의 결을 넓히고 싶은 분',
+      '심리·교육·돌봄 현장에서 몸의 접근을 함께 쓰는 분',
+      '혼자 하던 수련을 정리된 체계로 다시 세우고 싶은 분'
+    ],
+    point: '오감을 하나씩 깨우는 순서로 배열했습니다. 동작을 많이 외우는 과정이 아니라, 감각에서 몸으로 들어오는 순서를 익히는 과정입니다.'
+  },
+  {
+    key: 'c2', no: '02', catLabel: 'ACT PILATES 120 · 6 PARTS', channel: 'form',
+    title: 'ACT 필라테라피 온라인 자격증 과정',
+    sub: '수용전념치료의 여섯 과정을 몸의 움직임으로',
+    img: 'assets/c2-act-cert.jpg',
+    tag: '온라인 수강 · 120동작',
+    price: 480000, was: 580000, status: 'prep',
+    facts: ['6파트 120동작', '온라인 수강', '수료증 발급'],
+    itemsTitle: '커리큘럼',
+    items: [
+      '1 수용 — 밀어내지 않고 느끼기 (20동작)',
+      '2 탈융합 — 생각과 거리 두기 (20동작)',
+      '3 현재에 머무르기 — 지금의 몸 (20동작)',
+      '4 맥락적 자기 — 관찰하는 나 (20동작)',
+      '5 가치 — 움직임에 담는 방향 (20동작)',
+      '6 전념 행동 — 일상으로 옮기기 (20동작)',
+      '수료 기준: 전 파트 수강 + 실기 기록 1회 · 수료증 발급'
+    ],
+    for: [
+      '상담·교육 현장에서 몸을 매개로 마음을 다루는 분',
+      '필라테스·요가 수업에 ACT 관점을 얹고 싶은 강사',
+      '감정 조절 워크숍·특강을 준비하는 분'
+    ],
+    point: '수용전념치료의 여섯 과정을 매트 위 동작으로 번역했습니다. 이론 설명은 짧게, 몸에서 느낀 것을 기록하는 워크시트를 함께 씁니다.'
+  }
+];
+
 /* ---------- 카드 렌더 ---------- */
 const grid = $('#productGrid');
+const badgeOf = p => isForm(p)
+  ? '<span class="card-badge form">구글폼 신청</span>'
+  : '<span class="card-badge soon">스마트스토어 12월</span>';
+const channelLine = p => isForm(p)
+  ? '<span class="card-channel">구글폼 · 계좌이체 즉시 신청</span>'
+  : '<span class="card-channel store">스마트스토어 오픈 예정 · DM 사전 예약</span>';
+
 grid.innerHTML = PRODUCTS.map(p => `
-  <button class="card reveal" data-id="${p.id}" data-cat="${p.cat}" aria-label="${p.title} 상세 보기">
+  <button class="card reveal" data-id="${p.id}" data-cat="${p.cat}" data-channel-url="${urlFor(p)}" aria-label="${p.title} 상세 보기">
     <div class="card-media">
       <img src="${p.img}" alt="${p.title}" loading="lazy" width="1200" height="1200">
-      <span class="card-badge ${p.status === 'soon' ? 'soon' : ''}">${p.status === 'soon' ? '출시 예정' : '오픈 특가'}</span>
+      ${badgeOf(p)}
       <span class="card-idx">${p.no}</span>
       <span class="card-view">자세히 보기</span>
     </div>
@@ -895,6 +1220,7 @@ grid.innerHTML = PRODUCTS.map(p => `
         <span class="price-was">${won(p.was)}원</span>
         <span class="price-off">${Math.round((1 - p.price / p.was) * 100)}%</span>
       </span>
+      ${channelLine(p)}
     </div>
   </button>
 `).join('') + `
@@ -905,6 +1231,58 @@ grid.innerHTML = PRODUCTS.map(p => `
     <a class="link-underline" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">@mindmove_lab DM 보내기 ↗</a>
   </div>
 `;
+
+/* ---------- 자격증 과정 카드 ---------- */
+const certList = $('#certList');
+certList.innerHTML = COURSES.map(c => `
+  <button class="cert-card reveal" data-key="${c.key}" data-channel-url="${urlFor(c)}" aria-label="${c.title} 커리큘럼 보기">
+    <div class="cert-media">
+      <img src="${c.img}" alt="${c.title} 과정 이미지" loading="lazy" width="1200" height="1500">
+      <span class="cert-no">${c.no}</span>
+    </div>
+    <div class="cert-body">
+      <div class="cert-top">
+        <span class="cert-kicker">${c.catLabel}</span>
+        <span class="cert-state">${GOOGLE_FORM_URL ? '구글폼으로 바로 신청' : '구글폼 준비 중 · DM 신청'}</span>
+      </div>
+      <span class="cert-title">${c.title}</span>
+      <span class="cert-sub">${c.sub}</span>
+      <div class="cert-facts">${c.facts.map(f => `<span>${f}</span>`).join('')}</div>
+      <div class="cert-foot">
+        <span class="cert-price">
+          <span class="now"><b>${won(c.price)}</b>원</span>
+          <span class="was">${won(c.was)}원</span>
+          <span class="note">임시 표기</span>
+        </span>
+        <span class="cert-actions"><span class="cert-more">커리큘럼 보기 <span class="arw">→</span></span></span>
+      </div>
+    </div>
+  </button>
+`).join('');
+
+certList.addEventListener('click', e => {
+  const card = e.target.closest('.cert-card');
+  if (!card) return;
+  const c = COURSES.find(x => x.key === card.dataset.key);
+  if (c) openModal(c, 'course');
+});
+
+/* ---------- 클래스 · 특강 분야 선택 ---------- */
+const CLASS_FIELDS = [
+  { no: '01', name: '야외요가', desc: '공원·강변에서 호흡과 균형' },
+  { no: '02', name: '온라인요가', desc: '줌으로 함께, 매트 하나로' },
+  { no: '03', name: '임산부요가', desc: '임신 주기에 맞춘 안전한 움직임' },
+  { no: '04', name: 'ACT 필라테라피 특강', desc: '수용전념 여섯 과정을 몸으로' },
+  { no: '05', name: '기업강의', desc: '조직의 긴장을 내려놓는 60~90분', wide: true }
+];
+const picks = $('#classPicks');
+picks.innerHTML = CLASS_FIELDS.map(f => `
+  <button type="button" class="pick${f.wide ? ' wide' : ''}" data-field="${f.name}" aria-pressed="false">
+    <span class="p-no">${f.no}</span>
+    <span class="p-name">${f.name}</span>
+    <span class="p-desc">${f.desc}</span>
+  </button>
+`).join('');
 
 /* ---------- 카테고리 필터 ---------- */
 $$('.chip').forEach(chip => {
@@ -924,7 +1302,20 @@ const modal = $('#modal');
 const sheet = $('.modal-sheet');
 let lastFocus = null;
 
-function openModal(p) {
+let current = null;
+
+const modalChannel = (key, label, url) => `<button data-ch="${key}" data-channel-url="${url || ''}">${label} <span>↗</span></button>`;
+
+function buyLabel(p) {
+  if (isForm(p)) return '구글폼으로 바로 신청';
+  return SMARTSTORE_URL ? '스마트스토어에서 구매' : '스마트스토어 오픈 알림 신청';
+}
+
+function openModal(p, kind = 'product') {
+  const isCourse = kind === 'course';
+  const form = isForm(p);
+  const url = urlFor(p);
+  current = { item: p, kind };
   lastFocus = document.activeElement;
   $('#mImg').src = p.img;
   $('#mImg').alt = p.title;
@@ -933,13 +1324,28 @@ function openModal(p) {
   $('#mSub').textContent = p.sub;
   $('#mNow').textContent = won(p.price);
   $('#mWas').textContent = won(p.was) + '원';
-  $('#mTag').textContent = p.status === 'soon' ? '출시 예정 · 알림 신청 가능' : '오픈 특가 · 12월 오픈';
+  $('#mPriceNote').textContent = isCourse ? '임시 표기' : '오픈 특가';
+  $('#mItemsTitle').textContent = p.itemsTitle || '구성';
+  $('#mPointTitle').textContent = isCourse ? '과정의 결' : '미리보기 포인트';
+  $('#mTag').textContent = form
+    ? (isCourse ? '온라인 수강 · 실기 기록 · 수료증 발급' : '구글폼 신청 · 계좌이체 · 디지털 발송')
+    : '스마트스토어 12월 오픈 · 사전 예약 DM';
   $('#mItems').innerHTML = p.items.map(t => `<li>${t}</li>`).join('');
   $('#mFor').innerHTML = p['for'].map(t => `<li>${t}</li>`).join('');
   $('#mPoint').textContent = p.point;
-  $('#mBuy').innerHTML = (p.status === 'soon' ? '출시 알림 신청' : '구매하기') + ' <span class="arw">→</span>';
+  $('#mBuy').innerHTML = buyLabel(p) + ' <span class="arw">→</span>';
   $('#mBuy').dataset.name = p.title;
-  $('#mBuy').dataset.status = p.status;
+  $('#mBuy').dataset.channelUrl = url;
+  $('#mChannels').innerHTML = form
+    ? modalChannel('form', '구글폼 신청', url)
+      + (isCourse ? modalChannel('classes', '과정 문의', '') : '')
+      + modalChannel('dm', '인스타 DM', '')
+    : modalChannel('store', '스마트스토어', url) + modalChannel('dm', '사전 예약 DM', '');
+  $('#mFine').textContent = form
+    ? (isCourse
+      ? '가격과 모집 일정은 임시 표기입니다. 구글폼에서 계좌이체로 신청하시면 순차적으로 안내드려요.'
+      : '구글폼에서 계좌이체로 신청하시면 확인 후 파일을 보내드려요.')
+    : '스마트스토어는 12월 오픈 예정입니다. 지금은 인스타 DM으로 사전 예약을 받아요.';
 
   modal.classList.add('show');
   modal.setAttribute('aria-hidden', 'false');
@@ -987,17 +1393,143 @@ function toast(msg) {
 }
 
 $('#mBuy').addEventListener('click', e => {
-  const st = e.currentTarget.dataset.status;
-  toast(st === 'soon'
-    ? '출시 알림을 준비하고 있어요. 인스타 DM으로 ‘숨결샘’ 남겨 주시면 가장 먼저 안내드릴게요.'
-    : '구매 링크는 12월 오픈일에 연결됩니다. 인스타 DM으로 알림을 신청하실 수 있어요.');
+  const url = e.currentTarget.dataset.channelUrl;
+  if (url) { window.open(url, '_blank', 'noopener'); return; }
+  const item = current && current.item;
+  toast(item && isForm(item)
+    ? '구글폼을 준비 중이에요. 지금은 인스타 DM이나 이메일로 먼저 신청받고 있어요.'
+    : '스마트스토어는 12월 오픈 예정이에요. 인스타 DM으로 사전 예약을 받고 있어요.');
 });
-$$('.m-channels [data-ch]').forEach(b => {
-  b.addEventListener('click', () => {
-    if (b.dataset.ch === 'instagram') { window.open('https://ig.me/m/mindmove_lab', '_blank', 'noopener'); return; }
-    toast(b.dataset.ch + ' 스토어는 오픈일에 연결됩니다.');
+
+$('#mChannels').addEventListener('click', e => {
+  const b = e.target.closest('[data-ch]');
+  if (!b) return;
+  const ch = b.dataset.ch;
+  if (ch === 'dm') { window.open('https://ig.me/m/mindmove_lab', '_blank', 'noopener'); return; }
+  if (ch === 'classes') {
+    closeModal();
+    document.getElementById('classes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => toast('아래 문의 폼에서 분야를 고르고 내용을 남겨 주세요.'), 600);
+    return;
+  }
+  const url = b.dataset.channelUrl || (ch === 'form' ? GOOGLE_FORM_URL : SMARTSTORE_URL);
+  if (url) { window.open(url, '_blank', 'noopener'); return; }
+  toast(ch === 'form'
+    ? '구글폼은 준비 중이에요. 인스타 DM이나 이메일로 먼저 신청받고 있어요.'
+    : '스마트스토어는 12월 오픈 예정이에요. 인스타 DM으로 사전 예약을 받고 있어요.');
+});
+
+/* ---------- 판매 채널 연결 상태 표시 ---------- */
+function syncChannelState() {
+  const formOn = !!GOOGLE_FORM_URL, storeOn = !!SMARTSTORE_URL;
+  $$('[data-channel-state]').forEach(box => {
+    const fDot = $('[data-form-dot]', box), fTxt = $('[data-form-text]', box), fLink = $('[data-form-link]', box);
+    if (fDot) fDot.classList.toggle('on', formOn);
+    if (fTxt) fTxt.textContent = formOn
+      ? '구글폼(계좌이체)으로 01·02·04 상품과 자격증 두 과정을 바로 신청할 수 있어요.'
+      : '구글폼 신청은 준비 중이에요. 지금은 인스타 DM·이메일로 먼저 신청받고 있어요.';
+    if (fLink) {
+      fLink.href = formOn ? GOOGLE_FORM_URL : 'https://ig.me/m/mindmove_lab';
+      fLink.textContent = formOn ? '구글폼 열기 ↗' : 'DM으로 신청 ↗';
+      fLink.target = '_blank'; fLink.rel = 'noopener';
+    }
+    const sDot = $('[data-store-dot]', box), sTxt = $('[data-store-text]', box), sLink = $('[data-store-link]', box);
+    if (sDot) sDot.classList.toggle('on', storeOn);
+    if (sTxt) sTxt.textContent = storeOn
+      ? '실물 상품(03·05·06·07)은 스마트스토어에서 바로 구매하실 수 있어요.'
+      : '실물 상품(03·05·06·07)은 스마트스토어에서 12월 오픈 예정이에요. 지금은 DM으로 사전 예약을 받아요.';
+    if (sLink) {
+      sLink.href = storeOn ? SMARTSTORE_URL : 'https://ig.me/m/mindmove_lab';
+      sLink.textContent = storeOn ? '스마트스토어 열기 ↗' : '사전 예약 DM ↗';
+      sLink.target = '_blank'; sLink.rel = 'noopener';
+    }
   });
+}
+syncChannelState();
+
+/* ---------- 클래스 문의 버튼 (구글폼 / DM / 이메일) ---------- */
+function syncInquiryActions() {
+  const f = $('#sendForm'), dm = $('#sendDm');
+  if (!f || !dm) return;
+  if (GOOGLE_FORM_URL) {
+    f.href = GOOGLE_FORM_URL;
+    f.style.display = '';
+  } else {
+    f.style.display = 'none';
+    dm.classList.remove('btn-ghost');
+    dm.classList.add('btn-dark');
+  }
+}
+syncInquiryActions();
+
+/* ---------- 클래스 문의 — 복사 + 인스타 DM / 메일 ---------- */
+const inquiry = { field: '' };
+
+picks.addEventListener('click', e => {
+  const b = e.target.closest('.pick');
+  if (!b) return;
+  const on = b.getAttribute('aria-pressed') !== 'true';
+  $$('.pick', picks).forEach(x => x.setAttribute('aria-pressed', String(x === b && on)));
+  inquiry.field = on ? b.dataset.field : '';
+  const picked = $('#iqPicked');
+  picked.textContent = inquiry.field || '위에서 수업 분야를 선택해 주세요';
+  picked.classList.toggle('on', !!inquiry.field);
 });
+
+function inquiryMessage() {
+  const val = id => ($('#' + id).value || '').trim();
+  const lines = ['[숨결샘 수업 문의]', '· 분야: ' + (inquiry.field || '미선택')];
+  [['iqWhen', '희망 일정'], ['iqPeople', '희망 인원'], ['iqName', '성함·단체명'], ['iqContact', '연락처'], ['iqMemo', '문의 내용']]
+    .forEach(([id, label]) => { const t = val(id); if (t) lines.push('· ' + label + ': ' + t); });
+  lines.push('', '— 숨결샘 사이트 문의 폼에서 보냈습니다.');
+  return lines.join('\n');
+}
+
+function copyText(text) {
+  let ok = false;
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;padding:0;border:0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+  } catch (err) { ok = false; }
+  if (!ok && navigator.clipboard) { navigator.clipboard.writeText(text).catch(() => {}); ok = true; }
+  return ok;
+}
+
+function requireField() {
+  if (inquiry.field) return true;
+  toast('먼저 수업 분야를 하나 선택해 주세요.');
+  const first = $('.pick', picks);
+  if (first) first.focus();
+  document.getElementById('classes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  return false;
+}
+
+$('#sendDm').addEventListener('click', () => {
+  if (!requireField()) return;
+  const copied = copyText(inquiryMessage());
+  window.open('https://ig.me/m/mindmove_lab', '_blank', 'noopener');
+  toast(copied
+    ? '문의 내용을 복사했어요. 열린 인스타 DM 창에 붙여넣기만 하면 됩니다.'
+    : '인스타 DM 창을 열었어요. 내용은 직접 복사해 주세요.');
+});
+
+$('#sendMail').addEventListener('click', () => {
+  if (!requireField()) return;
+  const name = ($('#iqName').value || '').trim();
+  const subject = '[숨결샘] ' + inquiry.field + ' 수업 문의' + (name ? ' — ' + name : '');
+  window.location.href = 'mailto:akd7410@naver.com?subject=' + encodeURIComponent(subject)
+    + '&body=' + encodeURIComponent(inquiryMessage());
+  toast('메일 앱을 열었어요. 내용을 확인하고 보내 주세요.');
+});
+
+$('#inqForm').addEventListener('submit', e => e.preventDefault());
 
 /* ---------- FAQ ---------- */
 $$('.faq-item').forEach(item => {
