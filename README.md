@@ -2,6 +2,8 @@
 
 `Mind & Move Lab × 숨결샘` 브랜드 쇼핑몰 시안입니다. PC·모바일 반응형 단일 페이지(HTML/CSS/JS)로, 폴더째 저장한 뒤 `index.html`을 열면 바로 보입니다.
 
+**라이브 주소**: https://khk09031124.github.io/Mindmove-shop/ (저장소 `khk09031124/Mindmove-shop`, GitHub Pages · main / root 배포)
+
 ## 폴더 구성
 
 ```
