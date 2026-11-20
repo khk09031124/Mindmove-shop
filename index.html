@@ -399,8 +399,8 @@ ul{padding:0;list-style:none}
 .m-var[aria-pressed="true"] .v-price{color:rgba(251,247,240,.6)}
 .m-variant-block[hidden]{display:none}
 .modal-media.contain img{object-fit:contain;background:#FCF7F5}
-.modal-sheet.wide{grid-template-columns:1fr}
-.modal-sheet.wide .modal-media{aspect-ratio:1503/978;min-height:0;background:#FCF7F5}
+.modal-sheet.wide{display:flex;flex-direction:column}
+.modal-sheet.wide .modal-media{width:100%;flex:none;aspect-ratio:1503/978;min-height:0;background:#FCF7F5}
 .modal-sheet.wide .modal-body{padding:34px clamp(20px,4vw,52px) 40px;max-width:760px;margin-inline:auto;width:100%}
 .m-store-note{font-size:10.5px;color:var(--muted);letter-spacing:.02em;text-align:center;margin-top:-2px;line-height:1.6}
 .m-store-note[hidden]{display:none}
