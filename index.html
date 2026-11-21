@@ -368,6 +368,10 @@ ul{padding:0;list-style:none}
 .modal.show .modal-sheet{opacity:1;transform:none}
 .modal-media{position:relative;background:var(--paper-3);min-height:100%}
 .modal-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+@media(min-width:761px){
+  .modal-sheet:not(.wide) .modal-media{position:sticky;top:0;align-self:start;height:calc(100vh - 64px);min-height:0}
+  .modal-sheet:not(.wide) .modal-media img{object-fit:contain;background:#FBF7F0}
+}
 .modal-body{padding:44px 44px 40px;position:relative}
 .modal-close{
   position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;
@@ -381,6 +385,21 @@ ul{padding:0;list-style:none}
 .m-cat{font-size:9.5px;letter-spacing:.22em;color:var(--olive);text-transform:uppercase}
 .m-title{font-family:var(--serif);font-weight:400;font-size:27px;line-height:1.45;letter-spacing:-.035em;margin-top:12px}
 .m-sub{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.75}
+.m-intro{font-size:13px;color:var(--ink-2);line-height:1.95;margin-top:14px;padding-left:13px;border-left:2px solid rgba(176,122,92,.35)}
+.m-intro[hidden]{display:none}
+.m-spec{width:100%;border-collapse:collapse;font-size:12.5px}
+.m-spec th,.m-spec td{text-align:left;vertical-align:top;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+.m-spec th{width:34%;color:var(--muted);font-weight:400;letter-spacing:-.01em;padding-right:12px}
+.m-spec td{color:var(--ink-2);line-height:1.7}
+.m-spec tr:last-child th,.m-spec tr:last-child td{border-bottom:0}
+.m-uses{margin-top:8px}
+.m-uses li::before{content:"→";color:var(--clay);left:0;font-size:11px}
+.m-uses li{padding-left:16px;color:var(--muted)}
+.m-care li{color:var(--muted);font-size:12px}
+.class-notes{margin-top:18px;border-top:1px solid var(--line-soft);padding-top:14px}
+.class-notes li{position:relative;padding-left:0;font-size:12px;color:var(--muted);line-height:1.9}
+.class-notes li b{display:inline-block;min-width:44px;font-weight:500;color:var(--ink-2);letter-spacing:.02em}
+.m-block[hidden]{display:none}
 .m-price{display:flex;align-items:baseline;gap:10px;margin-top:22px;flex-wrap:wrap}
 .m-price .now{font-size:23px;font-weight:400;letter-spacing:-.02em}
 .m-price .now b{font-weight:500}
@@ -765,7 +784,7 @@ ul{padding:0;list-style:none}
         </p>
         <p class="ss-row">
           <span class="dot" data-store-dot></span>
-          <span data-store-text>실물 상품은 네이버 스마트스토어(「마음숨 스토어」)에서 구매하실 수 있어요. 배송비 3,000원 별도 · 첫 등록 후 순차 활성화.</span>
+          <span data-store-text>실물 상품은 네이버 스마트스토어(「마음숨 스토어」)에서 구매하실 수 있어요. 배송비 3,000원 별도로 보내드려요.</span>
           <a data-store-link href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">사전 예약 DM ↗</a>
         </p>
       </div>
@@ -828,6 +847,12 @@ ul{padding:0;list-style:none}
         <div class="reveal">
           <div class="picks" id="classPicks"></div>
           <p class="small" style="margin-top:20px">일정·장소·인원·예산은 상담 후 확정됩니다.<br>편하게 문의해 주세요.</p>
+          <ul class="class-notes">
+            <li><b>진행</b> 60~90분 · 1회 특강부터 회기별 연속 수업까지</li>
+            <li><b>인원</b> 1:1부터 단체까지, 현장에 맞춰 조정</li>
+            <li><b>준비물</b> 매트·소도구는 상담 후 확정 · 편한 복장</li>
+            <li><b>비용</b> 시간·인원·장소에 맞춰 안내드려요</li>
+          </ul>
         </div>
 
         <form class="inq reveal" id="inqForm" novalidate>
@@ -1019,9 +1044,10 @@ ul{padding:0;list-style:none}
       <p class="m-cat" id="mCat"></p>
       <h3 class="m-title" id="mTitle"></h3>
       <p class="m-sub" id="mSub"></p>
+      <p class="m-intro" id="mIntro" hidden></p>
       <div class="m-block m-variant-block" id="mVariantBlock" hidden>
-        <h6>받는 형태</h6>
-        <div class="m-variants" id="mVariants" role="group" aria-label="받는 형태 선택"></div>
+        <h6 id="mVariantTitle">받는 형태</h6>
+        <div class="m-variants" id="mVariants" role="group" aria-label="옵션 선택"></div>
       </div>
       <div class="m-price">
         <span class="now"><b id="mNow"></b>원</span>
@@ -1030,21 +1056,30 @@ ul{padding:0;list-style:none}
       </div>
       <span class="m-tag" id="mTag"></span>
       <div class="m-rule"></div>
-      <div class="m-block">
+      <div class="m-block" id="mSpecBlock" hidden>
+        <h6>구성 · 페이지 안내</h6>
+        <table class="m-spec" id="mSpec"></table>
+      </div>
+      <div class="m-block" id="mItemsBlock">
         <h6 id="mItemsTitle">구성</h6>
         <ul id="mItems"></ul>
       </div>
       <div class="m-block">
-        <h6>이런 분께</h6>
+        <h6 id="mForTitle">추천 대상 &amp; 활용 방법</h6>
         <ul id="mFor"></ul>
+        <ul id="mUses" class="m-uses"></ul>
       </div>
       <div class="m-block">
         <h6 id="mPointTitle">미리보기 포인트</h6>
         <p id="mPoint"></p>
       </div>
+      <div class="m-block" id="mCareBlock" hidden>
+        <h6>제작 · 배송 · 유의사항</h6>
+        <ul id="mCare" class="m-care"></ul>
+      </div>
       <div class="m-actions">
         <a class="btn btn-dark" id="mBuy" href="#" role="button">구글폼으로 바로 신청 <span class="arw">→</span></a>
-        <p class="m-store-note" id="mStoreNote" hidden>마음숨 스토어 · 배송비 3,000원 (첫 등록 후 순차 활성화)</p>
+        <p class="m-store-note" id="mStoreNote" hidden>마음숨 스토어 · 배송비 3,000원 별도</p>
         <div class="m-channels" id="mChannels">
           <a data-ch="form" href="#">구글폼 신청 <span>↗</span></a>
           <a data-ch="dm" href="https://ig.me/m/mindmove_lab" target="_blank" rel="noopener">인스타 DM <span>↗</span></a>
@@ -1074,8 +1109,26 @@ const PRODUCTS = [
     tag: '디지털 · 실물 스티커',
     price: 12000, was: 18000, status: 'open',
     items: ['요가·필라테스 동작 이모티콘 18종 (원본 PNG)', '다꾸용 스티커 18종 (PNG·SVG)', 'A4 인쇄용 스티커 시트 PDF 1종'],
-    for: ['메신저로 “오늘은 좀 쉬고 싶다”를 말하고 싶은 날', '다이어리를 몸의 기록으로 채우고 싶은 분'],
+    for: ['몸의 상태를 말로 꺼내기 어려운 분', '메신저와 다이어리를 몸의 기록으로 채우고 싶은 분'],
     point: '동작의 이름이 아니라 몸의 느낌으로 캡션을 달았습니다. 보내는 사람의 하루가 조금 가벼워지도록.',
+    intro: '몸을 잘 모르는 사람에게도 “오늘은 이 동작”이라고 말을 건네는 스티커입니다. 요가·필라테스 동작 18가지를 하나씩 손으로 그려, 메신저에도 다이어리에도 어색하지 않게 담았습니다.',
+    specRows: [
+      ['디지털 구성', '동작 이모티콘 18종 (PNG 원본) · 다꾸용 스티커 18종 (PNG·SVG) · A4 인쇄용 스티커 시트 PDF 1종'],
+      ['실물 구성', 'A6 스티커 18종 (300g 무광) · A4 인쇄용 시트 PDF 동봉'],
+      ['규격', 'A6 (105×148mm) · 300g 무광 스티커지 · 인쇄용 시트는 A4'],
+      ['받는 방법', '디지털은 구글폼 신청 후 메일 발송 · 실물은 마음숨 스토어에서 배송']
+    ],
+    uses: [
+      '상담·수업 마무리에 오늘의 몸을 하나 골라 붙이기',
+      '아이와 감정을 이야기할 때 몸 그림으로 먼저 물어보기',
+      '다이어리·플래너에 하루 한 장씩 붙이는 작은 루틴'
+    ],
+    care: [
+      '디지털은 신청 확인 후 영업일 1~2일 안에 이메일로 보내드려요. 파일 특성상 발송 후에는 교환·환불이 어렵습니다.',
+      '실물 스티커는 배송비 3,000원 별도 · 한진택배 · 출고 후 1~3일 (도서산간은 추가 요금).',
+      '단순 변심 반품은 수령 후 7일 이내(반품비 3,000원), 하자·오배송은 판매자 부담으로 교환해 드려요.',
+      '화면과 실제 인쇄물은 색이 조금 다를 수 있어요. 자료의 무단 배포·재판매는 삼가 주세요.'
+    ],
     badgeText: '디지털 · 실물 선택',
     variantNote: '디지털은 구글폼 · 실물 스티커는 스마트스토어',
     variants: [
@@ -1091,7 +1144,7 @@ const PRODUCTS = [
         price: 15000, priceNote: '임시 표기',
         tag: '실물 스티커 · 배송비 3,000원 별도',
         items: ['실물 스티커 18종 (A6 · 300g 무광)', 'A4 인쇄용 스티커 시트 PDF 동봉', '배송비 3,000원 별도'],
-        fine: '실물 스티커는 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 첫 등록 후 순차 활성화.'
+        fine: '실물 스티커는 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도로 보내드려요.'
       }
     ]
   },
@@ -1105,7 +1158,24 @@ const PRODUCTS = [
     price: 39000, was: 55000, status: 'open',
     items: ['활동지 60매 (아동 놀이 / 노인 / 미술치료)', '회기 진행 가이드 3부 — 도입·전개·마무리 대본', '준비물 체크리스트 & 회기 기록지'],
     for: ['아동·노인 대상 집단 프로그램을 운영하는 강사·상담사', '실습을 앞둔 예비 상담사'],
-    point: '한 회기를 끝까지 끌고 갈 수 있도록 예상 반응과 대응 멘트까지 적었습니다. A4 흑백 인쇄에 맞춰 여백을 잡았어요.'
+    point: '한 회기를 끝까지 끌고 갈 수 있도록 예상 반응과 대응 멘트까지 적었습니다. A4 흑백 인쇄에 맞춰 여백을 잡았어요.',
+    intro: '한 회기를 준비하는 데 반나절이 걸리지 않도록, 아동 놀이·노인·미술치료 세 갈래의 활동지를 한 묶음으로 만들었습니다. 도입부터 마무리까지 말로 할 멘트까지 적어 두어, 처음 진행하는 회기도 그대로 따라갈 수 있습니다.',
+    specRows: [
+      ['활동지', 'A4 60매 — 아동 놀이 / 노인 / 미술치료'],
+      ['회기 가이드', '3부 — 도입·전개·마무리 대본 포함'],
+      ['부록', '준비물 체크리스트 · 회기 기록지'],
+      ['형식', 'PDF (A4 흑백 인쇄에 맞춘 여백)']
+    ],
+    uses: [
+      '쉼터·복지관·요양시설 프로그램에서 바로 쓸 활동지가 필요할 때',
+      '미술치료·놀이치료 실습과 수퍼비전 자료로',
+      '아동과 어르신을 함께 만나는 세대통합 활동에'
+    ],
+    care: [
+      '구글폼 신청 후 계좌이체를 확인하고 영업일 1~2일 안에 이메일로 보내드려요.',
+      '파일 특성상 발송 후에는 교환·환불이 어렵습니다. 다른 자료로 바꾸고 싶다면 발송 전에 알려 주세요.',
+      'A4 흑백 인쇄에 맞춘 자료예요. 기관에서 여러 부 인쇄해 쓰셔도 되지만, 재판매는 삼가 주세요.'
+    ],
   },
   {
     id: 3, no: '03', cat: 'digital', catLabel: 'Digital PDF · Book', channel: 'form',
@@ -1118,6 +1188,24 @@ const PRODUCTS = [
     items: ['시퀀스 12개 (초급 / 중급 / 회복 흐름)', '동작 선화 220컷 — 직접 그린 그림', '호흡·큐잉 노트'],
     for: ['수업을 준비하는 요가·필라테스 강사', '집에서 혼자 흐름을 만들고 싶은 분'],
     point: '한 장에 한 시퀀스. 눈으로 따라가면 그대로 수업이 되도록 배열했습니다.',
+    intro: 'ASAR 요가 100동작과 ACT 필라테라피 120동작을 직접 그린 선화로 다시 정리해, 한 장에 한 시퀀스씩 눈으로 따라갈 수 있게 묶었습니다. 수업을 준비하는 강사에게도, 혼자 수련하는 사람에게도 같은 책이 쓰입니다.',
+    specRows: [
+      ['분량', '시퀀스 12개 · 동작 선화 220컷 (직접 그린 그림)'],
+      ['기반', 'ASAR 요가 100동작 · ACT 필라테라피 120동작'],
+      ['규격', 'A4 (210×297mm) · 인쇄용 PDF'],
+      ['실물', 'A4 스프링 제본 1권'],
+      ['포함', '초급 / 중급 / 회복 흐름 · 호흡·큐잉 노트']
+    ],
+    uses: [
+      '수업 전 10분, 큐잉 문장을 소리 내어 확인하는 준비 노트로',
+      '혼자 20~40분 흐름을 따라가며 오늘의 몸을 정할 때',
+      '강사 교육·스터디에서 동작 순서를 함께 볼 때'
+    ],
+    care: [
+      'PDF는 신청 확인 후 영업일 1~2일 안에 이메일로 보내드려요. 실물 스프링북은 배송비 3,000원 별도로 12월에 순차 발송됩니다.',
+      'PDF는 발송 후 교환·환불이 어렵고, 실물은 수령 후 7일 이내 단순 변심 반품이 가능해요(반품비 3,000원).',
+      '하자·오배송은 판매자 부담으로 교환해 드리고, 자료의 무단 배포·재판매는 삼가 주세요.'
+    ],
     variants: [
       {
         key: 'pdf', icon: '📄', label: 'PDF 파일로 받기', channel: 'form',
@@ -1137,7 +1225,7 @@ const PRODUCTS = [
   },
   {
     id: 4, no: '04', cat: 'digital', catLabel: 'Digital PDF', channel: 'form',
-    title: 'ACT 소마틱 워크북',
+    title: 'ACT 부모교육 워크북',
     sub: '감정을 몸과 말로 다독이는 실천 워크북',
     desc: '수용전념치료(ACT) 관점으로 다시 쓴 8회기 · 감정기록 노트',
     img: 'assets/p4-act-workbook.jpg',
@@ -1145,19 +1233,75 @@ const PRODUCTS = [
     price: 26000, was: 35000, status: 'open',
     items: ['8회기 부모 워크북 (PDF)', '감정 이름 카드 40장', '아이와 함께하는 대화 스크립트', '진행자 가이드'],
     for: ['아이의 감정에 어떻게 말을 걸지 고민인 부모', '부모교육을 준비하는 예비 강사'],
-    point: '“아이를 바꾸는” 대신 “나의 반응을 살피는” 질문으로 채웠습니다. 혼자 써도, 모임에서 함께 써도 좋습니다.'
+    point: '“아이를 바꾸는” 대신 “나의 반응을 살피는” 질문으로 채웠습니다. 혼자 써도, 모임에서 함께 써도 좋습니다.',
+    intro: '아이를 바꾸려 애쓰기 전에, 내 반응을 먼저 살펴보는 8회기입니다. 수용전념치료(ACT)의 여섯 과정을 부모의 언어로 옮겨, 읽고 쓰는 것만으로 한 회기가 끝나도록 만들었습니다.',
+    specRows: [
+      ['회기', '8회기 부모교육 워크북'],
+      ['부록', '감정 이름 카드 40장 · 아이와 함께하는 대화 스크립트 · 진행자 가이드'],
+      ['형식', 'PDF (A4 인쇄용) · 출력해 쓰는 워크시트'],
+      ['쓰는 방법', '혼자 하루 한 장 / 부모교육 모임에서 회기별로']
+    ],
+    uses: [
+      '하루 한 장을 골라 아이와의 대화를 적어 볼 때',
+      '부모교육 모임에서 회기별 워크시트로 나눠 쓸 때',
+      '부부가 같은 질문에 각자 답을 적어 보고 이야기 나눌 때'
+    ],
+    care: [
+      '구글폼 신청 후 계좌이체를 확인하고 영업일 1~2일 안에 이메일로 보내드려요.',
+      '파일 특성상 발송 후에는 교환·환불이 어렵습니다. 발송 전에 알려 주시면 다른 자료로 바꿔 드려요.',
+      'A4 인쇄용이며, 감정 카드는 두꺼운 종이에 인쇄하면 오래 쓸 수 있어요. 재판매·무단 배포는 삼가 주세요.'
+    ],
   },
   {
     id: 5, no: '05', cat: 'object', catLabel: 'Object', channel: 'store',
-    title: '요가동작 카드 · 요가 캘린더 액자',
+    title: '요가동작 카드 · 요가 캘린더',
     sub: '벽과 책상 위의 작은 리마인더',
     desc: '하루 한 동작, 눈에 들어오는 자리에',
     img: 'assets/p5-pose-cards.jpg',
-    tag: '실물 배송',
+    tag: '실물 배송 · 탁상형 / 액자 프레임',
     price: 34000, was: 45000, status: 'soon',
-    items: ['동작 카드 30장 (라운드 엣지 · 300g 무광)', '원목 미니 이젤', 'A5 캘린더 액자 + 12개월 카드'],
+    items: ['동작 카드 30장 (라운드 엣지 · 300g 무광)', 'A5 탁상형 캘린더 + 12개월 카드', '원목 미니 이젤'],
     for: ['새해의 결심이 작게 시작되길 바라는 분', '마음이 가는 사람에게 건네고 싶은 분'],
-    point: '카드에는 동작 그림과 한 줄 문장만. 액자는 매달 한 장씩 바꿔 끼우면 됩니다.'
+    point: '카드에는 동작 그림과 한 줄 문장만. 캘린더는 매달 한 장씩 바꿔 끼우면 됩니다. 책상 위에 세우는 탁상형과, 벽에 거는 액자 프레임 중에 골라 주세요.',
+    intro: 'ASAR 요가 100동작 가운데 매일 쓰기 좋은 30동작을 카드로 만들었습니다. 카드는 한 장에 동작 그림과 한 줄 문장만, 캘린더는 매달 한 장씩 바꿔 끼우며 12개월을 보냅니다. 책상 위에 세우는 탁상형과 벽에 거는 액자 프레임 중에 골라 주세요.',
+    specRows: [
+      ['동작 카드', '30장 · 라운드 엣지 · 300g 무광'],
+      ['캘린더', 'A5 탁상형 / A5 원목 액자 프레임 + 12개월 카드'],
+      ['거치', '원목 미니 이젤 1개'],
+      ['옵션', '탁상형 34,000원 · 액자 프레임 42,000원 (액자 +8,000원)'],
+      ['동작 선정', 'ASAR 요가 100동작 중 매일 쓰기 좋은 동작 30개']
+    ],
+    uses: [
+      '아침에 카드 한 장을 뽑아 그날의 몸으로 삼기',
+      '상담실·수업 공간의 책상과 벽에 조용한 안내로 두기',
+      '시작이 작았으면 하는 사람에게 새해 선물로'
+    ],
+    care: [
+      '실물 상품이에요. 「마음숨 스토어」에서 구매하실 수 있고, 배송비 3,000원 별도 · 한진택배로 보내드려요.',
+      '액자 프레임은 탁상형보다 8,000원 높은 구성입니다. 주문할 때 옵션에서 골라 주세요.',
+      '수령 후 7일 이내 단순 변심 반품이 가능하며(반품비 3,000원), 하자·오배송은 판매자 부담으로 교환해 드려요.',
+      '원목과 인쇄 특성상 결·색이 조금씩 다를 수 있어요.'
+    ],
+    badgeText: '탁상형 · 액자 선택',
+    variantNote: '탁상형 34,000원 · 액자 프레임 42,000원',
+    variantTitle: '캘린더 형태 선택',
+    priceFromNote: '탁상형 / 액자 프레임 중 선택',
+    variants: [
+      {
+        key: 'desk', icon: '🗓️', label: '탁상형 캘린더', channel: 'store',
+        price: 34000, was: 45000, priceNote: '기본 구성',
+        tag: '실물 배송 · 탁상형 캘린더',
+        items: ['동작 카드 30장 (라운드 엣지 · 300g 무광)', 'A5 탁상형 캘린더 + 12개월 카드', '원목 미니 이젤'],
+        fine: '탁상형은 책상 위에 세워 두는 기본 구성이에요. 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도.'
+      },
+      {
+        key: 'frame', icon: '🖼️', label: '액자 프레임 캘린더', channel: 'store',
+        price: 42000, was: 53000, priceNote: '탁상형 + 8,000원',
+        tag: '실물 배송 · 액자 프레임 캘린더',
+        items: ['동작 카드 30장 (라운드 엣지 · 300g 무광)', 'A5 원목 액자 프레임 캘린더 + 12개월 카드', '원목 미니 이젤'],
+        fine: '액자 프레임은 벽에 걸거나 세워 두는 구성으로, 탁상형보다 8,000원 높아요. 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도.'
+      }
+    ]
   },
   {
     id: 6, no: '06', cat: 'object', catLabel: 'Object', channel: 'store',
@@ -1168,8 +1312,25 @@ const PRODUCTS = [
     tag: '실물 배송 · 배송비 3,000원 별도',
     price: 18000, was: 24000, status: 'open',
     items: ['카드 22장 — 1 Red ~ 21 Peach + Your Color (수채 일러스트)', '안내서 1부 — 리딩 스프레드 3종', '린넨 파우치', '배송비 3,000원 별도'],
-    for: ['하루를 정리하는 저녁 루틴을 만들고 싶은 분', '상담·코칭 도구를 찾는 분'],
-    point: '정답을 말해 주는 카드가 아니라, 질문을 건네는 카드입니다. 색 이름과 감정 단어를 함께 적어 두었어요.'
+    for: ['저녁 루틴을 만들고 싶은 분', '상담·코칭에 쓸 도구를 찾는 분'],
+    point: '정답을 말해 주는 카드가 아니라, 질문을 건네는 카드입니다. 색 이름과 감정 단어를 함께 적어 두었어요.',
+    intro: '색과 감정 단어를 함께 적어 둔 22장의 카드입니다. 답을 정해 주는 대신 “오늘은 어떤 색에 가까운가요”라고 물어, 하루를 스스로 정리하는 시간을 만듭니다.',
+    specRows: [
+      ['카드', '22장 — 1 Red ~ 21 Peach + Your Color (수채 일러스트)'],
+      ['안내서', '1부 — 리딩 스프레드 3종'],
+      ['구성', '린넨 파우치 1개'],
+      ['형태', '실물 카드 · 배송비 3,000원 별도']
+    ],
+    uses: [
+      '잠들기 전 한 장 뽑아 오늘의 마음을 한 줄로 적기',
+      '상담·코칭에서 감정 단어를 여는 도구로',
+      '색을 좋아하는 사람에게 가볍게 건네는 선물로'
+    ],
+    care: [
+      '실물 상품으로 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 한진택배.',
+      '수령 후 7일 이내 단순 변심 반품 가능(반품비 3,000원), 하자·오배송은 판매자 부담으로 교환해 드려요.',
+      '인쇄·모니터 환경에 따라 색이 조금 다를 수 있습니다.'
+    ],
   },
   {
     id: 7, no: '07', cat: 'object', catLabel: 'Object · Digital', channel: 'form',
@@ -1180,8 +1341,25 @@ const PRODUCTS = [
     tag: '디지털 PDF · 실물 컬러링북',
     price: 12000, was: 18000, status: 'open',
     items: ['만다라 48면 (수채화·색연필 겸용 도안)', '난이도 3단계 · 컬러 가이드'],
-    for: ['잠들기 전 30분을 조용히 쓰고 싶은 분', '아이와 함께 조용한 시간을 갖고 싶은 부모'],
+    for: ['손으로 무언가 채우고 싶은 분', '아이와 조용한 시간을 갖고 싶은 부모'],
     point: '여백을 넓게 두어 손이 편하게 움직이도록 했습니다. 잘 채우지 않아도 괜찮은 도안입니다.',
+    intro: '빈 원을 채우는 동안 손이 먼저 조용해집니다. 만다라 48면을 난이도 3단계로 나누어, 5분이 남는 시간에도 한 면을 시작할 수 있게 했습니다.',
+    specRows: [
+      ['도안', '만다라 48면 (수채화·색연필 겸용)'],
+      ['난이도', '3단계 · 컬러 가이드 포함'],
+      ['형식', 'PDF (A4 인쇄용) / 실물 무선제본 1권'],
+      ['실물', '무선 제본 48면 · 배송비 3,000원 별도']
+    ],
+    uses: [
+      '한 면을 5~20분씩 나눠 채우는 짧은 루틴으로',
+      '아이와 색연필을 나눠 같은 도안을 각자 칠해 보기',
+      '상담·수업에서 긴장을 낮추는 워밍업 활동으로'
+    ],
+    care: [
+      'PDF는 신청 확인 후 영업일 1~2일 안에 이메일로, 실물은 12월에 순차 발송됩니다.',
+      'PDF는 발송 후 교환·환불이 어렵고, 실물은 수령 후 7일 이내 단순 변심 반품이 가능해요(반품비 3,000원).',
+      '인쇄용 도안이라 여러 번 출력해 써도 괜찮지만, 재판매·무단 배포는 삼가 주세요.'
+    ],
     variants: [
       {
         key: 'pdf', icon: '📄', label: 'PDF 파일로 받기', channel: 'form',
@@ -1294,7 +1472,7 @@ const channelLine = p => p.variants
 const priceBlock = p => p.variants
   ? `<span class="card-price">
         <span class="price-now"><b>${won(minPrice(p))}</b>원부터</span>
-        <span class="price-from">PDF / 실물책 중 선택</span>
+        <span class="price-from">${p.priceFromNote || 'PDF / 실물책 중 선택'}</span>
       </span>`
   : `<span class="card-price">
         <span class="price-now"><b>${won(p.price)}</b>원</span>
@@ -1451,7 +1629,7 @@ function paintModal(p, kind, variant) {
         ? '가격과 모집 일정은 임시 표기입니다. 구글폼에서 계좌이체로 신청하시면 순차적으로 안내드려요.'
         : '구글폼에서 계좌이체로 신청하시면 확인 후 파일을 보내드려요.')
       : (SMARTSTORE_URL
-        ? '실물 상품은 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 첫 등록 후 순차 활성화.'
+        ? '실물 상품은 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도로 보내드려요.'
         : '스마트스토어는 12월 오픈 예정입니다. 지금은 인스타 DM으로 사전 예약을 받아요.'));
 }
 
@@ -1486,7 +1664,30 @@ function openModal(p, kind = 'product') {
   sheet.classList.toggle('wide', p.fit === 'contain');
   $('#mTitle').textContent = p.title;
   $('#mSub').textContent = p.sub;
-  $('#mItemsTitle').textContent = p.itemsTitle || '구성';
+  $('#mItemsTitle').textContent = p.itemsTitle || (p.specRows ? '이 구성에 담긴 것' : '구성');
+  $('#mVariantTitle').textContent = p.variantTitle || '받는 형태';
+  const intro = $('#mIntro');
+  intro.textContent = p.intro || '';
+  intro.hidden = !p.intro;
+  $('#mItemsBlock').hidden = !!p.specRows;
+  const specBlock = $('#mSpecBlock');
+  if (p.specRows && p.specRows.length) {
+    $('#mSpec').innerHTML = p.specRows.map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('');
+    specBlock.hidden = false;
+  } else {
+    $('#mSpec').innerHTML = '';
+    specBlock.hidden = true;
+  }
+  $('#mForTitle').textContent = isCourse ? '이런 분께' : '추천 대상 & 활용 방법';
+  $('#mUses').innerHTML = (p.uses || []).map(t => `<li>${t}</li>`).join('');
+  const careBlock = $('#mCareBlock');
+  if (p.care && p.care.length) {
+    $('#mCare').innerHTML = p.care.map(t => `<li>${t}</li>`).join('');
+    careBlock.hidden = false;
+  } else {
+    $('#mCare').innerHTML = '';
+    careBlock.hidden = true;
+  }
   $('#mPointTitle').textContent = isCourse ? '과정의 결' : '미리보기 포인트';
   $('#mFor').innerHTML = p['for'].map(t => `<li>${t}</li>`).join('');
   $('#mPoint').textContent = p.point;
@@ -1590,7 +1791,7 @@ function syncChannelState() {
     const sDot = $('[data-store-dot]', box), sTxt = $('[data-store-text]', box), sLink = $('[data-store-link]', box);
     if (sDot) sDot.classList.toggle('on', storeOn);
     if (sTxt) sTxt.textContent = storeOn
-      ? '실물 상품(01 실물 스티커 · 03 · 05 · 06 · 07)은 네이버 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도 · 첫 등록 후 순차 활성화.'
+      ? '실물 상품(01 실물 스티커 · 03 · 05 · 06 · 07)은 네이버 「마음숨 스토어」에서 구매하실 수 있어요. 배송비 3,000원 별도로 보내드려요.'
       : '실물 상품(05·06)과 03·07의 실물책은 스마트스토어에서 12월 오픈 예정이에요. 지금은 DM으로 사전 예약을 받아요.';
     if (sLink) {
       sLink.href = storeOn ? SMARTSTORE_URL : 'https://ig.me/m/mindmove_lab';
