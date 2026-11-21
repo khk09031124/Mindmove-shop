@@ -52,7 +52,12 @@ body{
   word-break:keep-all;overflow-wrap:anywhere;
 }
 body.is-locked{overflow:hidden}
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;-webkit-user-drag:none;user-drag:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+/* 이미지 · 자료 보호 — 우클릭·드래그·길게 눌러 저장 방지 */
+img,.hero-img,.card-media,.cert-media,.modal-media,.story-visual .frame{
+  -webkit-user-drag:none;user-drag:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+}
+img{pointer-events:auto}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 h1,h2,h3,h4,p,ul,figure{margin:0}
@@ -736,7 +741,7 @@ ul{padding:0;list-style:none}
       <div class="hero-visual">
         <div class="hero-frame">
           <div class="hero-img">
-            <img src="assets/hero-studio.jpg" alt="자연광 아래 코르크 매트 위에서 요가 동작을 손으로 그리고 있는 숨결샘의 스케치북" width="960" height="1200">
+            <img src="assets/hero-studio.jpg" alt="자연광 아래 코르크 매트 위에서 요가 동작을 손으로 그리고 있는 숨결샘의 스케치북" width="960" height="1200" draggable="false">
           </div>
         </div>
         <div class="hero-note">
@@ -904,7 +909,7 @@ ul{padding:0;list-style:none}
     <div class="wrap story-grid">
       <div class="story-visual reveal">
         <div class="frame">
-          <img src="assets/p3-sequence-book.jpg" alt="직접 그린 요가 동작 선화가 담긴 시퀀스북" width="1200" height="1200" loading="lazy">
+          <img src="assets/p3-sequence-book.jpg" alt="직접 그린 요가 동작 선화가 담긴 시퀀스북" width="1200" height="1200" loading="lazy" draggable="false">
         </div>
         <div class="story-seal"><b>숨결샘</b>since 2026</div>
       </div>
@@ -1030,8 +1035,8 @@ ul{padding:0;list-style:none}
       </div>
     </div>
     <div class="foot-bot">
-      <span>© 2026 Mind &amp; Move Lab. All rights reserved.</span>
-      <span class="disclaimer">본 페이지는 오픈 전 시안입니다. 이미지·문구·가격은 실제 판매 시 달라질 수 있으며, 모든 이미지와 자료는 숨결샘의 창작물입니다.</span>
+      <span>© 숨결샘 (Mind &amp; Move Lab) · 모든 자료의 무단 복제·배포·재판매를 금지합니다.</span>
+      <span class="disclaimer">이미지·문구·가격은 실제 판매 시 달라질 수 있으며, 모든 이미지와 자료(활동지·워크북·시퀀스북·카드)의 저작권은 숨결샘에게 있습니다.</span>
     </div>
   </div>
 </footer>
@@ -1040,7 +1045,7 @@ ul{padding:0;list-style:none}
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-hidden="true">
   <div class="modal-bg" data-close></div>
   <div class="modal-sheet" role="document">
-    <div class="modal-media" id="mMedia"><img id="mImg" alt=""></div>
+    <div class="modal-media" id="mMedia"><img id="mImg" alt="" draggable="false"></div>
     <div class="modal-body">
       <button class="modal-close" data-close aria-label="닫기"></button>
       <p class="m-cat" id="mCat"></p>
@@ -1096,6 +1101,18 @@ ul{padding:0;list-style:none}
 
 <script>
 document.documentElement.classList.add('js');
+
+/* ============================================================
+   이미지 보호 — 우클릭 · 드래그 · 길게 눌러 저장 방지
+   (카드·모달·자격증·히어로 이미지에 적용)
+   ============================================================ */
+(function guardImages() {
+  const SEL = 'img, .card-media, .cert-media, .modal-media, .hero-img, .story-visual .frame';
+  const hit = e => e.target && e.target.closest && e.target.closest(SEL);
+  document.addEventListener('contextmenu', e => { if (hit(e)) e.preventDefault(); }, { passive: false });
+  document.addEventListener('dragstart', e => { if (hit(e)) e.preventDefault(); });
+  document.addEventListener('selectstart', e => { if (hit(e)) e.preventDefault(); });
+})();
 
 /* ============================================================
    상품 데이터 — 여기만 고치면 카드·모달·가격이 함께 바뀝니다.
@@ -1527,7 +1544,7 @@ const priceBlock = p => p.variants
 grid.innerHTML = PRODUCTS.map(p => `
   <button class="card reveal" data-id="${p.id}" data-cat="${p.cat}" data-channel-url="${urlFor(p)}" aria-label="${p.title} 상세 보기">
     <div class="card-media${p.fit === 'contain' ? ' contain' : ''}">
-      <img src="${p.img}" alt="${p.title}" loading="lazy" width="1200" height="1200">
+      <img src="${p.img}" alt="${p.title}" loading="lazy" width="1200" height="1200" draggable="false">
       ${badgeOf(p)}
       <span class="card-idx">${p.no}</span>
       <span class="card-view">자세히 보기</span>
@@ -1554,7 +1571,7 @@ const certList = $('#certList');
 certList.innerHTML = COURSES.map(c => `
   <button class="cert-card reveal" data-key="${c.key}" data-channel-url="${urlFor(c)}" aria-label="${c.title} 커리큘럼 보기">
     <div class="cert-media">
-      <img src="${c.img}" alt="${c.title} 과정 이미지" loading="lazy" width="1200" height="1500">
+      <img src="${c.img}" alt="${c.title} 과정 이미지" loading="lazy" width="1200" height="1500" draggable="false">
       <span class="cert-no">${c.no}</span>
     </div>
     <div class="cert-body">
