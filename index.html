@@ -2,6 +2,15 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<!-- Google 태그 (GA4) — 방문·유입 경로·클릭 집계 시작 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3TXXBD851"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y3TXXBD851');
+</script>
+<!-- Google 태그 (GA4) 끝 -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>숨결샘 — Mind &amp; Move Lab | 마음과 움직임이 머무는 자리</title>
 <meta name="description" content="아동심리학 박사수료 심리상담사 숨결샘이 직접 기획하고 그린 마음·움직임·예술 아카이브. 요가·필라테스 시퀀스북, ACT 부모교육 자료집, 색채 타로카드, 아트 만다라 컬러링북. ASAR 요가·ACT 필라테라피 온라인 자격증 과정과 야외·임산부·키즈 요가, 기업강의 문의.">
@@ -1979,6 +1988,80 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries)
 }, { threshold: .12, rootMargin: '0px 0px -40px 0px' }) : null;
 if (io) $$('.reveal').forEach(el => io.observe(el));
 else $$('.reveal').forEach(el => el.classList.add('in'));
+</script>
+
+<!-- ============================================================
+     GA4 이벤트 — 상품 모달 열기 · 구매하기 클릭 · 문의 링크 클릭
+     화면 동작·레이아웃·보안 스크립트는 건드리지 않고 클릭만 집계합니다.
+     ============================================================ -->
+<script>
+(function trackShopClicks() {
+  var send = function (name, params) {
+    try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch (err) {}
+  };
+  var channelOf = function (href) {
+    var u = String(href || '');
+    if (!u) return 'pending';
+    if (u.indexOf('smartstore.naver.com') > -1) return 'smartstore';
+    if (u.indexOf('docs.google.com/forms') > -1) return 'google_form';
+    if (u.indexOf('ig.me') > -1 || u.indexOf('instagram.com') > -1) return 'instagram_dm';
+    if (u.indexOf('mailto:') === 0) return 'email';
+    return 'other';
+  };
+
+  var modal = document.getElementById('modal');
+  var mBuy = document.getElementById('mBuy');
+  var mTitle = document.getElementById('mTitle');
+
+  /* 상품·자격증 과정 상세 모달이 열릴 때 (view_item) */
+  if (modal && mBuy && mTitle && window.MutationObserver) {
+    var wasOpen = false;
+    new MutationObserver(function () {
+      var open = modal.classList.contains('show');
+      if (open && !wasOpen) {
+        send('view_item', { item_name: mBuy.dataset.name || mTitle.textContent || '', item_list_name: '숨결샘 쇼핑몰' });
+      }
+      wasOpen = open;
+    }).observe(modal, { attributes: true, attributeFilter: ['class'] });
+
+    /* 구매하기 버튼 · 채널(구글폼·스마트스토어·DM) 클릭 (buy_click) */
+    document.addEventListener('click', function (e) {
+      var t = e.target && e.target.closest ? e.target : null;
+      if (!t) return;
+      var buy = t.closest('#mBuy');
+      if (buy) {
+        send('buy_click', {
+          item_name: buy.dataset.name || mTitle.textContent || '',
+          channel: channelOf(buy.getAttribute('href')),
+          link_url: buy.getAttribute('href') || ''
+        });
+        return;
+      }
+      var chip = t.closest('#mChannels [data-ch]');
+      if (chip) {
+        var ch = chip.dataset.ch;
+        send('buy_click', {
+          item_name: mBuy.dataset.name || mTitle.textContent || '',
+          channel: ch === 'store' ? 'smartstore' : (ch === 'dm' ? 'instagram_dm' : 'google_form'),
+          link_url: chip.getAttribute('href') || ''
+        });
+      }
+    }, true);
+  }
+
+  /* 사이트 안 신청·스토어·문의 링크 클릭 (lead_click) */
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var label = '';
+    if (a.id === 'sendForm' || a.hasAttribute('data-form-link')) label = '구글폼 신청';
+    else if (a.id === 'sendDm') label = '인스타 DM 문의';
+    else if (a.id === 'sendMail') label = '이메일 문의';
+    else if (a.hasAttribute('data-store-link')) label = '스마트스토어 열기';
+    else return;
+    send('lead_click', { method: label, link_url: a.getAttribute('href') || '' });
+  }, true);
+})();
 </script>
 </body>
 </html>
