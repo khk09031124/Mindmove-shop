@@ -2019,7 +2019,8 @@ else $$('.reveal').forEach(el => el.classList.add('in'));
     new MutationObserver(function () {
       var open = modal.classList.contains('show');
       if (open && !wasOpen) {
-        send('view_item', { item_name: mBuy.dataset.name || mTitle.textContent || '', item_list_name: '숨결샘 쇼핑몰' });
+        var nm = mBuy.dataset.name || mTitle.textContent || '';
+        send('view_item', { item_name: nm, item_list_name: '숨결샘 쇼핑몰', items: [{ item_name: nm }] });
       }
       wasOpen = open;
     }).observe(modal, { attributes: true, attributeFilter: ['class'] });
@@ -2030,20 +2031,24 @@ else $$('.reveal').forEach(el => el.classList.add('in'));
       if (!t) return;
       var buy = t.closest('#mBuy');
       if (buy) {
+        var buyName = buy.dataset.name || mTitle.textContent || '';
         send('buy_click', {
-          item_name: buy.dataset.name || mTitle.textContent || '',
+          item_name: buyName,
           channel: channelOf(buy.getAttribute('href')),
-          link_url: buy.getAttribute('href') || ''
+          link_url: buy.getAttribute('href') || '',
+          items: [{ item_name: buyName }]
         });
         return;
       }
       var chip = t.closest('#mChannels [data-ch]');
       if (chip) {
         var ch = chip.dataset.ch;
+        var chipName = mBuy.dataset.name || mTitle.textContent || '';
         send('buy_click', {
-          item_name: mBuy.dataset.name || mTitle.textContent || '',
+          item_name: chipName,
           channel: ch === 'store' ? 'smartstore' : (ch === 'dm' ? 'instagram_dm' : 'google_form'),
-          link_url: chip.getAttribute('href') || ''
+          link_url: chip.getAttribute('href') || '',
+          items: [{ item_name: chipName }]
         });
       }
     }, true);
