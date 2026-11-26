@@ -1460,13 +1460,20 @@ const $$ = (s, el = document) => [...el.querySelectorAll(s)];
    ============================================================ */
 const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSed-aKan6mwxoXgQBLHHtfsfteXBgq5rA-ZFVigohyD0EEc8g/viewform';   // 구글폼 응답 링크 (2026-11-20 연결)
 const SMARTSTORE_URL = 'https://smartstore.naver.com/soombreath_store';   // 마음숨 스토어 (2026-11-21 연결 · 첫 상품 등록 후 순차 활성화)
-const PER_ITEM_URL = {};      // 상품별 개별 링크가 필요할 때만: { p3: 'https://smartstore.naver.com/…/products/1234' }
+/* 상품별 개별 링크 — 채널별로 지정할 수 있습니다. 문자열이면 그 상품의 전 버튼에 적용 */
+const PER_ITEM_URL = {
+  p7: { store: 'https://smartstore.naver.com/soombreath_store/products/13897531890' }   // 07 실물책 → 스토어 새 상품(화방용품>스케치북/크로키북)
+};
 
 const itemKey = item => item.key || ('p' + item.id);
 const isForm = item => item.channel !== 'store';
-const urlFor = item => PER_ITEM_URL[itemKey(item)] || (isForm(item) ? GOOGLE_FORM_URL : SMARTSTORE_URL);
+const perItemUrl = (channel, item) => {
+  const v = PER_ITEM_URL[itemKey(item)];
+  return v ? (typeof v === 'string' ? v : v[channel]) : null;
+};
+const urlFor = item => perItemUrl(isForm(item) ? 'form' : 'store', item) || (isForm(item) ? GOOGLE_FORM_URL : SMARTSTORE_URL);
 /* 채널을 직접 넣어 계산 (03 · 07처럼 PDF/실물 두 형태를 가진 상품용) */
-const urlForChannel = (channel, item) => PER_ITEM_URL[itemKey(item)] || (channel !== 'store' ? GOOGLE_FORM_URL : SMARTSTORE_URL);
+const urlForChannel = (channel, item) => perItemUrl(channel, item) || (channel !== 'store' ? GOOGLE_FORM_URL : SMARTSTORE_URL);
 const minPrice = p => p.variants ? Math.min(...p.variants.map(v => v.price)) : p.price;
 
 /* ============================================================
